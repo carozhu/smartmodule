@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="item_nomal">@color/md_white_1000</drawable>
+    <!--<drawable name="item_nomal">#00FFFFFF</drawable>-->
+    <drawable name="item_pressed">#10000000</drawable>
+</resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="default_theme_app_color">#68af65</color>
+    <color name="float_transparent">#00000000</color>
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="error_stroke_color">#F27474</color>
+    <color name="success_stroke_color">#A5DC86</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="text_color">#575757</color>
+
+    <!--通用字体颜色值-->
+    <color name="common_normal_textcolor">#333333</color>
+    <color name="common_grey_textcolor">#999999</color>
+    <color name="common_red_textcolor">#fd0303</color>
+
+    <!--快递页面主色调-->
+    <color name="theme_delivery_color">#FF1BA5E4</color>
+    <string name="theme_delivery_color">#FF1BA5E4</string>
+
+
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#e0f4f3</color>
+    <color name="dark_green_color">#4cb050</color>
+    <color name="grey_btn_bg_color">#f9f9f9</color>
+    <color name="gray_light">#ececec</color>
+    <color name="grey_btn_bg_pressed_color">#f3f3f3</color>
+    <color name="consignee_addr_bg">#fdfbe9</color>
+    <color name="dark_blue_color">#ff7900</color>
+    <color name="light_blue_color">#f6b172</color>
+    <color name="dark_yellow_color">#50b5eb</color>
+    <color name="caterory_yellow_color">#eb6100</color>
+    <color name="light_yellow_color">#80cff9</color>
+    <color name="orange_yellow">#ff7900</color>
+    <color name="white">#fff</color>
+    <color name="blur_bg">#FFFAF0</color>
+    <color name="black">#000000</color>
+    <color name="grey">#808080</color>
+    <color name="rzl_grey">#F0F0F0</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#0079FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_true">#00000000</color>
+    <color name="transparent_background">#9000</color>
+    <color name="transparent_gold">#7000</color>
+    <color name="mall_middle_line">#f4f5ed</color>
+    <color name="dark_gray">#e5e4e0</color>
+    <color name="goods_normal_dark_gray">#dddddd</color>
+    <color name="goods_click_dark_gray">#d6d6d6</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <!-- 灰色 -->
+    <color name="actionsheet_blue">#037BFF</color>
+    <!-- t天空蓝 -->
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="actionbar_bg">#FF0099CC</color>
+    <color name="statusbar_bg">#F0F0F0</color>
+    <color name="green_color">#45C01A</color>
+    <color name="gold_color">#ffff00</color>
+    <color name="capture_text_cover_bg">#99535353</color>
+    <color name="color_accent">#7c4dff</color>
+    <color name="color_success">#3CCD88</color>
+    <color name="color_error">#f44336</color>
+    <color name="background_tab_pressed">#4cb050</color> <!-- dark_green_color -->
+    <color name="wave_color">#FF5722</color>
+    <color name="yellow">#ffffd200</color>
+    <color name="darkgrey">#ff404040</color>
+    <color name="toasterro">#9fd524</color>
+    <color name="lightgrey">#ff888888</color>
+    <color name="semitransparent">#80000000</color>
+    <color name="lightransparent">#a0000000</color>
+    <color name="navpage">#FFE1E8EB</color>
+
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="golden_stars">#FFC619</color>
+</resources>

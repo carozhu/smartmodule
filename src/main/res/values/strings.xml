@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SmartModule</string>
+    <string name="login_tips">奋力登录中</string>
+
+
+    <string name="scan_qrcode"></string>
+    <string name="msg_camera_framework_bug">抱歉，Android相机可能被占用，您可能需要重启设备。</string>
+    <string name="button_ok">确定</string>
+    <string name="unselect">未选择</string>
+</resources>

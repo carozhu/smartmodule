@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="defaultcolorPrimary">#469a84</color>
+    <color name="defaultcolorPrimaryDark">#469a84</color>
+    <color name="defaultcolorAccent">#FF4081</color>
+
+     <color name="myprivate_theme_color">#12B7F5</color>
+</resources>

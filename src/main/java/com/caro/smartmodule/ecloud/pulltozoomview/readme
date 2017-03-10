@@ -1,0 +1,2 @@
+the lib has a BUG:
+contentView root layout must be Relativelayout

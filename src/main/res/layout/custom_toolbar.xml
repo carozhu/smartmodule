@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ToorbarTheme.AppBarOverlay"
+    app:popupTheme="@style/ToorbarTheme.PopupOverlay"
+  >
+
+    <!--  android:theme="@style/ToorbarTheme.AppBarOverlay"
+    app:popupTheme="@style/ToorbarTheme.PopupOverlay"-->
+
+    <!-- Back text -->
+    <TextView
+        android:id="@+id/toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textColor="@color/md_white_1000"
+        tools:text="Overview"/>
+
+    <!-- This is a centered title -->
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:textColor="@color/md_white_1000"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        tools:text="@string/app_name"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rightTitle"
+        android:text="right Title"
+        android:textColor="@color/md_white_1000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center|right"/>
+</android.support.v7.widget.Toolbar>

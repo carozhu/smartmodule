@@ -1,0 +1,11 @@
+免责声明:
+感谢国内外android开发贡献者,如有侵权,纯属开源精神的分享为之.感谢作者.
+
+旨在模块化编程,缩短开发者项目开发周期和复杂度.
+
+在某些库compile加载时,老是提示加载失败,故通过源码下载下来加入到smartmodule库中,后续再进行一一解决.
+1:MultiStateView
+2:VerticalViewPager https://github.com/kaelaela/VerticalViewPager
+3:SmsObserverForAndroid https://github.com/Robin-jiangyufeng/SmsObserverForAndroid
+
+使用smartmudule须知:

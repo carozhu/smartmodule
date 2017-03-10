@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="DefaultAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/defaultcolorPrimary</item>
+        <item name="colorPrimaryDark">@color/defaultcolorPrimaryDark</item>
+        <item name="colorAccent">@color/defaultcolorAccent</item>
+    </style>
+
+
+    <style name="ToorbarTheme" parent="DefaultAppTheme"/>
+    <style name="ToorbarTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="ToorbarTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+</resources>

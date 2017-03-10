@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.caro.smartmodule.viewComponent.LoadingViewAnim.LVCircularSmile
+            android:id="@+id/lv_circularSmile"
+            android:padding="10dp"
+            android:background="@drawable/bg_loading_dialog"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/loading_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="sssssss"
+            android:textColor="@color/grey" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

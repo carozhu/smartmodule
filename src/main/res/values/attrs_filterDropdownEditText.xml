@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--FilterDropDownEditText-->
+    <declare-styleable name="FilterDropDownEditText">
+        <attr name="AutoFillDropdownEditText_default_drop_down_key_color" format="color"/>
+        <attr name="AutoFillDropdownEditText_default_drop_down_bg" format="reference"/>
+        <attr name="AutoFillDropdownEditText_arrow_up" format="reference"/>
+        <attr name="AutoFillDropdownEditText_arrow_down" format="reference"/>
+        <attr name="AutoFillDropdownEditText_default_drop_down_divider" format="boolean"/>
+    </declare-styleable>
+</resources>

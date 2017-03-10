@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--belong to SimpleItemLabView.class-->
+    <declare-styleable name="SimpItemLabView">
+        <attr name="labtext" format="string"/>
+        <attr name="infomessage" format="string"/>
+        <attr name="isshowarrow" format="boolean"/>
+        <attr name="showline" format="boolean"/>
+        <attr name="labicon" format="reference"/>
+        <attr name="rightlabicon" format="reference"/>
+        <attr name="rightlabiconurl" format="string"/>
+    </declare-styleable>
+</resources>
