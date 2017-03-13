@@ -572,6 +572,7 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
      ****************************************/
 
 
+
     /**
      *  针对是Custom title bar 的布局
      * @param resid
@@ -585,7 +586,11 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish();
+                    if (mOnToolbarOnNavigationClickListener!=null){
+                        mOnToolbarOnNavigationClickListener.onNavToobarClick(v);
+                    }else {
+                        finish();
+                    }
                 }
             });
             mToolbar.setBackgroundColor(Color.parseColor(toolbarcolor));
@@ -602,7 +607,13 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
 
         }
     }
-
+    private OnToolbarOnNavigationClickListener mOnToolbarOnNavigationClickListener;
+    public void setOnToolbarOnNavigationClickListener(OnToolbarOnNavigationClickListener mOnToolbarOnNavigationClickListener){
+        this.mOnToolbarOnNavigationClickListener = mOnToolbarOnNavigationClickListener;
+    }
+    public interface OnToolbarOnNavigationClickListener{
+        public void onNavToobarClick(View view);
+    }
     /**
      * 针对不是Custom title bar 的布局
      * @param resid
@@ -616,6 +627,7 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
                 @Override
                 public void onClick(View v) {
                     finish();
+
                 }
             });
         }
@@ -636,7 +648,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
 
         }
     }
-
 
 
     /**

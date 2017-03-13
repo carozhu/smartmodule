@@ -36,6 +36,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -99,8 +101,9 @@ dependencies {
     //compile('com.android.support:support-v4:23.4.0') {
     //    force = true;
     //}
-    //compile 'com.google.guava:guava:21.0'
-
+    compile "com.google.guava:guava:${rootProject.ext.guavaVersion}"
+    //Google 官方方案,解决Dex拆分
+    compile 'com.android.support:multidex:1.0.0'
 
     /*日志打印*/
     compile 'com.orhanobut:logger:1.13'
