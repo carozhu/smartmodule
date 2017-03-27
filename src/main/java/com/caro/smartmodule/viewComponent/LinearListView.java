@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,7 +17,7 @@ import com.caro.smartmodule.R;
  * {@link ListAdapter}
  */
 public class LinearListView extends IcsLinearLayout {
-
+   private final String TAG = LinearListView.class.getSimpleName();
 	private static final int[] R_styleable_LinearListView = new int[] {
 		/* 0 */android.R.attr.entries,
 		/* 1 */R.attr.dividerThickness
@@ -278,5 +279,49 @@ public class LinearListView extends IcsLinearLayout {
 						mPosition, mAdapter.getItemId(mPosition));
 			}
 		}
+	}
+
+
+	public int getMWidth() {
+		return width;
+	}
+
+	public int getMHeight() {
+		return height;
+	}
+
+	private int width;
+	private int height;
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		width = getMySize(widthMeasureSpec);
+		height = getMySize(heightMeasureSpec);
+		Log.i(TAG,"width == "+width+ "  height == "+height);
+		setMeasuredDimension(width, height);
+	}
+
+	private int getMySize( int measureSpec) {
+		int mySize = 0;
+
+		int mode = MeasureSpec.getMode(measureSpec);
+		int size = MeasureSpec.getSize(measureSpec);
+
+		switch (mode) {
+			case MeasureSpec.UNSPECIFIED: {//如果没有指定大小，就设置为默认大小
+				mySize = 0;
+				break;
+			}
+			case MeasureSpec.AT_MOST: {//如果测量模式是最大取值为size
+				//我们将大小取最大值,你也可以取其他值
+				mySize = size;
+				break;
+			}
+			case MeasureSpec.EXACTLY: {//如果是固定的大小，那就不要去改变它
+				mySize = size;
+				break;
+			}
+		}
+		return mySize;
 	}
 }

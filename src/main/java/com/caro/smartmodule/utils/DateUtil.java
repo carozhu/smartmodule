@@ -1,6 +1,10 @@
 package com.caro.smartmodule.utils;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.net.ParseException;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,6 +21,14 @@ import java.util.Locale;
  *         useage :eg: long times = Long.parseLong(WAB.getCreatetime())*1000;
  *         Date d = DateTools.longToDate(times,"yyyy-MM-dd HH:mm:ss"); String
  *         time =DateTools.dateToString(d,"yyyy-MM-dd HH:mm:ss");
+ *         <p>
+ *         Date d = new Date(time * 1L);
+ *         <p>
+ *         //sf = new SimpleDateFormat(“hh::mm”);  小写h代表12小时制
+ *         <p>
+ *         //sf = new SimpleDateFormat(“HH::mm”);  大写H代表24小时制
+ *         <p>
+ *         return sf.format(d);
  */
 public class DateUtil {
 
@@ -182,8 +194,7 @@ public class DateUtil {
      * @throws ParseException
      */
 
-    public static long stringToLong(String strTime, String formatType)
-            throws ParseException {
+    public static long stringToLong(String strTime, String formatType) throws ParseException {
         Date date = stringToDate(strTime, formatType); // String类型转成date类型
         if (date == null) {
             return 0;
@@ -299,7 +310,6 @@ public class DateUtil {
      */
 
     /**
-     *
      * @param date
      * @return
      */
@@ -388,4 +398,128 @@ public class DateUtil {
         endCal.set(Calendar.MILLISECOND, 999);
         return endCal;
     }
+
+    // 根据日期取得星期几
+    public static String getWeek(Date date) {
+        // String[] weeks = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+        // Calendar cal = Calendar.getInstance();
+        // cal.setTime(date);
+        // int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        // if(week_index<0){
+        // week_index = 0;
+        // }
+        // return weeks[week_index];
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String week = sdf.format(date);
+        return week;
+    }
+
+
+    /**
+     * 根据年月日 日期取得星期几
+     *
+     * @param stringDate 默认年月日格式为yyyy-MM-dd
+     * @return 返回当前时间是星期几
+     */
+    public static String getWeek(String stringDate) {
+        Date date = stringToDate(stringDate, "yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String week = sdf.format(date);
+        return week;
+    }
+
+
+    /**
+     * 得到现在时间
+     *
+     * @return 字符串 yyyyMMdd HHmmss
+     */
+    public static String getStringToday() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd HHmmss");
+        String dateString = formatter.format(currentTime);
+        return dateString;
+    }
+
+    /**
+     * 得到现在小时
+     */
+    public static String getHour() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        String hour;
+        hour = dateString.substring(11, 13);
+        return hour;
+    }
+
+    /**
+     * 得到现在分钟
+     *
+     * @return
+     */
+    public static String getMinute() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        String min;
+        min = dateString.substring(14, 16);
+        return min;
+    }
+
+
+    /**
+     * 根据年月日时分秒时间格式，得到现在小时
+     * @param formatTime 格式为：yyyy-MM-dd HH:mm:ss
+     * @return hour
+     */
+    public static int getHour(String formatTime){
+        Date nowDate = DateUtil.stringToDate(formatTime,"yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(nowDate);
+        String hourstr = dateString.substring(11, 13);
+        int hour = Integer.parseInt(hourstr);
+        return hour;
+    }
+
+    /**
+     * 根据系统时间判断当前时间是白天还是夜晚
+     * @param context
+     * @return type 0:白天，1：夜晚
+     */
+    public static int getSystimeDayOrNight( Context context){
+        int type = 0;
+        //获得内容提供者
+        ContentResolver mResolver= context.getContentResolver();
+        //获得系统时间制
+        String timeFormat = android.provider.Settings.System.getString(mResolver,android.provider.Settings.System.TIME_12_24);
+        //判断时间制
+        if(timeFormat.equals("24"))
+        {
+            //24小时制
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(new Date());
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            //Log.d("dayType","24小时制，get hourOfDay == "+hourOfDay);
+            if (hourOfDay>6 && hourOfDay <19){//规定早上6点到下午7点为白天
+                type = 0;
+            }else {//其他时间为晚上
+                type = 1;
+            }
+        }else {
+            //12小时制
+            //获得日历
+            Calendar mCalendar=Calendar.getInstance();
+            if(mCalendar.get(Calendar.AM_PM)==0){
+                //白天
+                type = 0;
+            }else {
+                //晚上
+                type = 1;
+            }
+            Log.d("dayType","12小时制");
+        }
+        return type;
+    }
+
 }

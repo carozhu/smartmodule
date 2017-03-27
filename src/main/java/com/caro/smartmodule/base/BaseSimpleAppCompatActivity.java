@@ -597,9 +597,15 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         }
         this.actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(indicator);
-            actionBar.setDisplayShowHomeEnabled(true); // show or hide the default home button
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            if (indicator!=null){
+                actionBar.setHomeAsUpIndicator(indicator);
+                actionBar.setDisplayShowHomeEnabled(true); // show or hide the default home button
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }else {
+                actionBar.setDisplayShowHomeEnabled(false); // show or hide the default home button
+                actionBar.setDisplayHomeAsUpEnabled(false);
+            }
+
             actionBar.setDisplayShowCustomEnabled(true); // enable overriding the default toolbar layout
             actionBar.setDisplayShowTitleEnabled(false); // disable the default title element here (for centered title)
             setBackTextClickable();

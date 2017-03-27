@@ -1,3 +1,13 @@
 /build
-smartmodule.iml
-.iml
+*.iml
+.idea
+.settings
+.DS_Store # only needed under mac os
+.gradles
+/test
+tests/
+test/
+.gradle
+/local.properties
+/captures
+*.apk
