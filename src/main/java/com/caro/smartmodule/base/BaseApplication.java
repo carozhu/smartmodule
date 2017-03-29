@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
-import com.caro.smartmodule.helpers.ExceptionHelpers.ExceptionHandler;
-import com.caro.smartmodule.unit.DebugConfig;
 
+import com.caro.smartmodule.ConfigureManager;
+import com.caro.smartmodule.helpers.ExceptionHelpers.ExceptionHandler;
 
 
 /**
@@ -16,7 +16,7 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
-        if (DebugConfig.DEVELOPER_MODE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+        if (ConfigureManager.DEVELOPER_MODE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDialog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyDeath().build());
         }

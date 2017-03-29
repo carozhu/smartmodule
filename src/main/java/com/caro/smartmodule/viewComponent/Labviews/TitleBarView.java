@@ -91,7 +91,7 @@ public class TitleBarView extends RelativeLayout {
         if (titleBgColor != 0) {
             titlebar.setBackgroundColor(titleBgColor);
         }else {
-            titlebar.setBackgroundColor( ConfigureManager.OnConfigureManager().getAppThemeColor());
+            titlebar.setBackgroundColor( ConfigureManager.getConfigureManager().getAppThemeColor());
         }
 
         if(rightBtnBackground == null){

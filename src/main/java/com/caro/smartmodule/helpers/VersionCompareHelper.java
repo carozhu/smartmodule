@@ -1,46 +1,29 @@
-package com.caro.smartmodule.helpers.AppUpdateHelper;
-
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-
-import com.caro.smartmodule.R;
-import com.caro.smartmodule.base.BaseApplication;
+package com.caro.smartmodule.helpers;
 
 
 /**
  * Created by caro on 16/3/21.
  * updaate dialog helper
- * <p>
  * you can custom your upgrade title and content
- * <p>
  * sample usage:
+ * TODO: 16/3/22 you  need compare serversion and localversion
+ * try {
+ * if (VersionCompareHelper.compareVersion(serVersion, localAppVer) > 0) {
+ * VersionCompareHelper.Update(context, dwnApkUrl, serVersion, intr);
+ * }else {
+ * TODO: 16/3/29 lastest
  * <p>
- * // TODO: 16/3/22 you  need compare serversion and localversion
- *       try {
- *           if (UpdateHelper.compareVersion(serVersion, localAppVer) > 0) {
- *              UpdateHelper.Update(context, dwnApkUrl, serVersion, intr);
- *           }else {
- *              // TODO: 16/3/29 lastest
- *
- *           }
- *       } catch (Exception e) {
- *           e.printStackTrace();
- *      }
+ * }
+ * } catch (Exception e) {
+ * e.printStackTrace();
+ * }
  */
-public class UpdateHelper {
-
-
-
+public class VersionCompareHelper {
 
     /**
      * 比较版本号的大小,前者大则返回一个正数,后者大返回一个负数,相等则返回0
      *
-     * @param serVersion local verser
+     * @param serVersion  local verser
      * @param localAppVer localAppVer
      * @return
      */

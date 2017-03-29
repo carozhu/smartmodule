@@ -500,6 +500,7 @@ public class DateUtil {
             Calendar calendar = GregorianCalendar.getInstance();
             calendar.setTime(new Date());
             int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = Integer.parseInt(getMinute());
             //Log.d("dayType","24小时制，get hourOfDay == "+hourOfDay);
             if (hourOfDay>6 && hourOfDay <19){//规定早上6点到下午7点为白天
                 type = 0;
@@ -517,7 +518,7 @@ public class DateUtil {
                 //晚上
                 type = 1;
             }
-            Log.d("dayType","12小时制");
+            //Log.d("dayType","12小时制");
         }
         return type;
     }

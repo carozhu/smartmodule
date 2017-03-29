@@ -3,7 +3,6 @@ package com.caro.smartmodule.zxing;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -30,7 +29,6 @@ import com.caro.smartmodule.R;
 import com.caro.smartmodule.base.BaseSimpleAppCompatActivity;
 import com.caro.smartmodule.helpers.ActivityManageHelper;
 import com.caro.smartmodule.utils.DisplayMetricsUtil;
-import com.caro.smartmodule.viewComponent.Labviews.TitleBarView;
 import com.caro.smartmodule.zxing.camera.BeepManager;
 import com.caro.smartmodule.zxing.camera.CameraManager;
 import com.caro.smartmodule.zxing.decode.CaptureActivityHandler;
@@ -398,7 +396,7 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         if (points != null && points.length > 0) {
             Canvas canvas = new Canvas(barcode);
             Paint paint = new Paint();
-            paint.setColor(ConfigureManager.OnConfigureManager().getAppThemeColor());
+            paint.setColor(ConfigureManager.getConfigureManager().getAppThemeColor());
             if (points.length == 2) {
                 paint.setStrokeWidth(4.0f);
                 drawLine(canvas, paint, points[0], points[1], scaleFactor);

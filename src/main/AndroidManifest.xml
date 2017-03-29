@@ -25,6 +25,7 @@
         android:supportsRtl="true"
         tools:replace="label">
 
+        <!--android:name="xx" xx必须写包名全路径。不然加载时加载不到-->
         <!--  tools:node="remove"-->
         <meta-data
             android:name="com.caro.smartmodule.ImageLoader.SmartGlideModule"
@@ -32,10 +33,22 @@
 
 
         <activity
-            android:name=".zxing.CaptureActivity"
+            android:name="com.caro.smartmodule.zxing.CaptureActivity"
             android:theme="@style/DefaultAppTheme"
             android:screenOrientation="portrait">
         </activity>
+
+        <receiver android:name="com.caro.smartmodule.http.DownloadService$DownloadManagerReceiver">
+            <intent-filter>
+                <!-- 配置 点击通知 和 下载完成 两个 action -->
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".http.DownloadService"
+            android:enabled="true" />
 
     </application>
 
