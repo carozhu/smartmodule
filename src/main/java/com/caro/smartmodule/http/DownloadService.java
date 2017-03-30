@@ -111,13 +111,13 @@ public class DownloadService extends Service {
             Bundle bundle = intent.getExtras();
             String downloadUrl = bundle.getString("downloadUrl");
             fileName = bundle.getString("fileName");
-            appDowunPath =  getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+            appDowunPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
             //Log.i("dirType","onStartCommand appDowunPath == "+appDowunPath +  " fileName == "+fileName);
-            File downloadFile = new File(appDowunPath+"/"+fileName);
-            if (downloadFile.exists()){
+            File downloadFile = new File(appDowunPath + "/" + fileName);
+            if (downloadFile.exists()) {
                 installAPK(downloadFile);
                 return super.onStartCommand(intent, flags, startId);
-           }
+            }
 
             //创建下载任务,downloadUrl就是下载链接
             request = new DownloadManager.Request(Uri.parse(downloadUrl));
@@ -146,8 +146,8 @@ public class DownloadService extends Service {
             // 4 TYPE
             //request.setDestinationInExternalPublicDir(dirType, fileName);
             // 5 TYpe 设置到app下载目录
-            String  appDownloadPath = Environment.DIRECTORY_DOWNLOADS;
-            request.setDestinationInExternalFilesDir( this , appDownloadPath , fileName );//目录: Android -> data -> com.app -> files -> Download
+            String appDownloadPath = Environment.DIRECTORY_DOWNLOADS;
+            request.setDestinationInExternalFilesDir(this, appDownloadPath, fileName);//目录: Android -> data -> com.app -> files -> Download
 
             /*在默认的情况下，通过Download Manager下载的文件是不能被Media Scanner扫描到的 。
             进而这些下载的文件（音乐、视频等）就不会在Gallery 和  Music Player这样的应用中看到。

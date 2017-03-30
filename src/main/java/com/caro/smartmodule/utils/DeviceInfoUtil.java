@@ -16,7 +16,6 @@ import java.io.File;
 
 /**
  * @Description:手机设备的相关信息
- * @author http://blog.csdn.net/finddreams
  */
 public class DeviceInfoUtil
 {
@@ -35,7 +34,7 @@ public class DeviceInfoUtil
         {
             e.printStackTrace();
         }
-        return "A000002CBD64E7";
+        return null;
     }
 
     public static String getMacWifi(Context context)
