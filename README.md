@@ -13,6 +13,11 @@ https://github.com/Blankj/AndroidUtilCode
 * 应用场景
 * 优缺点
 
+# 使用须知
+请将你的application 继承 BaseApplication，以良好支持方法数达到64k以上带来的问题
+
 # MQTT
 https://github.com/eclipse/paho.mqtt.android
+
+
 

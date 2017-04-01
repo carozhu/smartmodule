@@ -4,9 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 
 import com.caro.smartmodule.ConfigureManager;
 import com.caro.smartmodule.helpers.ExceptionHelpers.ExceptionHandler;
+import com.karumi.dexter.Dexter;
 
 
 /**
@@ -22,6 +24,13 @@ public class BaseApplication extends Application {
         }
         super.onCreate();
         setContext(getApplicationContext());
+        Dexter.initialize(this);//dex拆分
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        MultiDex.install(this);
     }
 
     @Override
