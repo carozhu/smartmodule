@@ -1,7 +1,6 @@
 package com.caro.smartmodule.zxing;
 
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
@@ -41,7 +41,10 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -73,12 +76,14 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
     private ViewfinderView viewfinderView;
     private SurfaceView surfaceView;
     private SurfaceHolder surfaceHolder;
-    private TextView statusView;
+    private TextView scantipsTv;
+    private TextView titleTv;
     private ImageView onecode;
     private ImageView qrcode;
 
-
-
+    private String title;//titlebar 标题
+    private String tips;//用户提示
+    private Class<? extends Activity> destClass;
 
     /**
      * 活动监控器，用于省电，如果手机没有连接电源线，那么当相机开启后如果一直处于不被使用状态则该服务会将当前activity关闭。
@@ -99,18 +104,41 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
     private ActivityManageHelper activityManager;
 
 
-    public static void startCaptureActivity(Activity activity, int requestCode, String scanType){
+    /**
+     * @param activity
+     * @param requestCode
+     * @param scanType
+     * @param title
+     * @param tips
+     * @param destClass,maybe null.if not null.please let your destClass maybe implents Serializable
+     */
+    public static void startCaptureActivity(Activity activity,
+                                            int requestCode,
+                                            String scanType,
+                                            String title,
+                                            String tips,
+                                            int stateBarColorID,
+                                            String stateBarColorstr,
+                                            Class<? extends Activity> destClass) {
         Intent intent = new Intent();
-        Bundle bundle =new Bundle();
-        bundle.putString("scanType",scanType);
+        Bundle bundle = new Bundle();
+        bundle.putString("scanType", scanType);
+        bundle.putString("title", title);
+        bundle.putString("tips", tips);
+        bundle.putInt("stateBarColorID", stateBarColorID);
+        bundle.putString("stateBarColorstr", stateBarColorstr);
+        bundle.putSerializable("destClass", destClass);
         intent.putExtras(bundle);
         intent.setClass(activity, CaptureActivity.class);
         activity.startActivityForResult(intent, requestCode);
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_captrure);
+
         initViewStateBar(R.color.theme_delivery_color);
         swipeback(false, getResources().getString(R.string.theme_delivery_color));
         activityManager = ActivityManageHelper.getInstance();
@@ -119,7 +147,8 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
 
         setCanBack(R.id.back);
         surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-        statusView = (TextView) findViewById(R.id.status_view);
+        scantipsTv = (TextView) findViewById(R.id.scan_tips);
+        titleTv = (TextView) findViewById(R.id.titlebar_title);
         onecode = (ImageView) findViewById(R.id.onecode_id);
         qrcode = (ImageView) findViewById(R.id.qrcode_id);
         qrcode.setBackgroundResource(R.drawable.scan_qr_hl);
@@ -127,8 +156,6 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         initEvent();
         initComponent();
     }
-
-
 
 
     /**
@@ -156,15 +183,42 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         inactivityTimer.onResume();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle==null) {
+        if (bundle == null) {
             qrcodeSetting();
-        }else {
+        } else {
             String scantype = bundle.getString("scanType");
-            if (scantype.equalsIgnoreCase(ONECODETYPE)){
+            if (scantype.equalsIgnoreCase(ONECODETYPE)) {
                 viewfinderView.setVisibility(View.VISIBLE);
                 currentState = "onecode";
                 onecodeSetting();
+            } else {
+                currentState = QRCODETYPE;
             }
+
+            title = bundle.getString("title");
+            tips = bundle.getString("tips");
+
+            if (!TextUtils.isEmpty(title)) {
+                titleTv.setText(title);
+            }
+            if (!TextUtils.isEmpty(tips)) {
+                scantipsTv.setText(tips);
+            }
+
+
+            int stateColorId = bundle.getInt("stateBarColorID");
+            if (stateColorId != 0) {
+                initViewStateBar(stateColorId);
+                findViewById(R.id.titleparent).setBackgroundResource(stateColorId);
+            }
+
+            String stateColorStr = bundle.getString("stateBarColorstr");
+            if (!TextUtils.isEmpty(stateColorStr)) {
+                swipeback(false, stateColorStr);
+            }
+            destClass = (Class<? extends Activity>) bundle.getSerializable("destClass");
+
+
         }
     }
 
@@ -189,7 +243,6 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         currentState = this.mSharedPreferences.getString("currentState", "qrcode");
         cameraManager = new CameraManager(getApplication());
-
     }
 
 
@@ -255,7 +308,7 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
      * 展示状态视图和扫描窗口，隐藏结果视图
      */
     private void resetStatusView() {
-        statusView.setVisibility(View.VISIBLE);
+        scantipsTv.setVisibility(View.VISIBLE);
         viewfinderView.setVisibility(View.VISIBLE);
     }
 
@@ -373,13 +426,15 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         bundle.putString("decodeDate", formatter.format(new Date(rawResult.getTimestamp())));
         bundle.putCharSequence("metadataText", metadataText);
         bundle.putString("resultString", rawResult.getText());//scan result
-        //TODO: 16/1/29  resultString is your get code info, refer to device id,do bind the device,then dialog for bind device progress
-        //intent.setClass(CaptureActivity.this, ResultActivity.class);
         intent.putExtras(bundle);
-        //startActivity(intent);
-        setResult(200, intent);
-        finish();
-
+        if (destClass != null) {
+            intent.setClass(context, destClass);
+            startActivity(intent);
+            finish();
+        } else {
+            setResult(200, intent);
+            finish();
+        }
 
     }
 
@@ -465,7 +520,7 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         viewfinderView.refreshDrawableState();
         //cameraManager.setManualFramingRect(360, 222);
         int width = DisplayMetricsUtil.getScreenWidth(context);
-        cameraManager.setManualFramingRect((width / 2) + 120, ((width / 2) + 120)/2);
+        cameraManager.setManualFramingRect((width / 2) + 120, ((width / 2) + 120) / 2);
         //int width = DisplayMetricsUtil.getScreenWidth(context);
         //cameraManager.setManualFramingRect((width / 2) + (width / 2)/2, (width / 2) + (width / 2)/2);
         viewfinderView.refreshDrawableState();
@@ -559,14 +614,29 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-//		switch (keyCode) {
-//		case KeyEvent.KEYCODE_BACK: // 拦截返回键
-//
-//			restartPreviewAfterDelay(0L);
-//			return true;
-//		}
+        /*
+        switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK: // 拦截返回键
+
+			restartPreviewAfterDelay(0L);
+			return true;
+		}*/
         return super.onKeyDown(keyCode, event);
     }
 
+
+    public static class ResultScan {
+        String result;
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+
+    }
 
 }
