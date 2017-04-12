@@ -17,111 +17,96 @@ import java.io.File;
 /**
  * @Description:手机设备的相关信息
  */
-public class DeviceInfoUtil
-{
+public class DeviceInfoUtil {
 
-    public static String getImei(Context context){
-        try
-        {
+    public static String getImei(Context context) {
+        try {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String id = tm.getDeviceId();
-            if (id != null)
-            {
+            if (id != null) {
                 return tm.getDeviceId();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String getMacWifi(Context context)
-    {
+    /**
+     * 1）硬件限制：并不是所有的设备都有Wifi和蓝牙硬件，硬件不存在自然也就得不到这一信息。
+     * 2）获取的限制：如果Wifi没有打开过，是无法获取其Mac地址的；而蓝牙是只有在打开的时候才能获取到其Mac地址。
+     *
+     * @param context
+     * @return
+     */
+    public static String getMacWifi(Context context) {
         WifiManager wifi = (WifiManager) context
                 .getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
         String s = info.getMacAddress();
-        if (s != null)
-        {
+        if (s != null) {
             return s;
         }
         return "";
     }
 
-    public static String getMacBluetooth(Context context)
-    {
+    public static String getMacBluetooth(Context context) {
         BluetoothAdapter bAdapt = BluetoothAdapter.getDefaultAdapter();
-        if (bAdapt != null)
-        {
-            if (bAdapt.isEnabled())
-            {
+        if (bAdapt != null) {
+            if (bAdapt.isEnabled()) {
                 return bAdapt.getAddress();
             }
         }
         return "";
     }
 
-    public static String getImsi(Context context)
-    {
-        try
-        {
+    public static String getImsi(Context context) {
+        try {
             TelephonyManager tm = (TelephonyManager) context
                     .getSystemService(Context.TELEPHONY_SERVICE);
             String imsi = tm.getSubscriberId();
-            if (imsi == null)
-            {
+            if (imsi == null) {
                 imsi = "";
             }
             return imsi;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    public static float getDensity(Context context)
-    {
+    public static float getDensity(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
         dm = context.getApplicationContext().getResources().getDisplayMetrics();
         return dm.density;
     }
 
-    public static String getModel()
-    {
+    public static String getModel() {
         return android.os.Build.MODEL;
     }
 
-    public static int getScreenWidth(Context context)
-    {
+    public static int getScreenWidth(Context context) {
         WindowManager mWindowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         return mWindowManager.getDefaultDisplay().getWidth();
     }
 
-    public static int getScreenHeight(Context context)
-    {
+    public static int getScreenHeight(Context context) {
         WindowManager mWindowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         return mWindowManager.getDefaultDisplay().getHeight();
     }
 
-    public static boolean isSDAva()
-    {
+    public static boolean isSDAva() {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)
-                || Environment.getExternalStorageDirectory().exists())
-        {
+                || Environment.getExternalStorageDirectory().exists()) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
+
     /**
      * 获得SD卡总大小
      *
