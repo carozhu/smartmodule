@@ -38,9 +38,6 @@ public class SmartADautoScrollViewpager extends LinearLayout {
     public SmartADautoScrollViewpager(Context context) {
         super(context);
         this.context = context;
-        rootView = View.inflate(context, R.layout.structure_smart_adviewpager, this);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADPagerAtrrs);
-        initView(typedArray);
     }
 
     public SmartADautoScrollViewpager(Context context, AttributeSet attrs) {
