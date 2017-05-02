@@ -1,6 +1,7 @@
 package com.caro.smartmodule.viewComponent.RecyclerView;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.Collections;
@@ -297,6 +298,9 @@ public abstract class HeaderRecyclerViewAdapter<VH extends RecyclerView.ViewHold
     public OnRecyclerItemClickListener onItemClickListener;
     public interface OnRecyclerItemClickListener{
         void onItemClick(int position);
+    }
+    public LayoutInflater getLayoutInflater(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext());
     }
 
 

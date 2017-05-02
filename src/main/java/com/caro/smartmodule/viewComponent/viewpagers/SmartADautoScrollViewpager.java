@@ -28,48 +28,49 @@ public class SmartADautoScrollViewpager extends LinearLayout {
     private AutoScrollViewPager autoScrollViewPager;
     private CirclePageIndicator circlePageIndicator;
 
-    private boolean showIndicator;
-    private int fillColor;
-    private int strokeColor;
-    private int radius;
-    private int interval;
+    private boolean showIndicator=false;
+    private int fillColor=0xFFFFFFFF;
+    private int strokeColor=0xFFFFFFFF;
+    private int radius=10;
+    private int interval=4000;
 
 
     public SmartADautoScrollViewpager(Context context) {
         super(context);
         this.context = context;
+        rootView = View.inflate(context, R.layout.structure_smart_adviewpager, this);
+        initView();
     }
 
     public SmartADautoScrollViewpager(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         rootView = View.inflate(context, R.layout.structure_smart_adviewpager, this);
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ADPagerAtrrs);
-        initView(typedArray);
+        showIndicator = typedArray.getBoolean(R.styleable.ADPagerAtrrs_showIndicator, false);
+        interval = typedArray.getInteger(R.styleable.ADPagerAtrrs_interval, 4000);
+        radius = typedArray.getInteger(R.styleable.ADPagerAtrrs_radius, 10);
+        strokeColor = typedArray.getColor(R.styleable.ADPagerAtrrs_StrokeColor, Color.parseColor("#FFFFFF"));
+        fillColor = typedArray.getColor(R.styleable.ADPagerAtrrs_FillColor, Color.parseColor("#FFFFFF"));
+
+        initView();
     }
 
 
-    private void initView(TypedArray typedArray) {
+    private void initView() {
         autoScrollViewPager = (AutoScrollViewPager) rootView.findViewById(R.id.autopager);
         circlePageIndicator = (CirclePageIndicator) rootView.findViewById(R.id.indicator);
 
-        showIndicator = typedArray.getBoolean(R.styleable.ADPagerAtrrs_showIndicator, false);
         if (showIndicator) {
             circlePageIndicator.setVisibility(VISIBLE);
         } else {
             circlePageIndicator.setVisibility(GONE);
         }
 
-        fillColor = typedArray.getColor(R.styleable.ADPagerAtrrs_FillColor, Color.parseColor("#FFFFFF"));
         circlePageIndicator.setFillColor(fillColor);
-
-        strokeColor = typedArray.getColor(R.styleable.ADPagerAtrrs_StrokeColor, Color.parseColor("#FFFFFF"));
         circlePageIndicator.setStrokeColor(strokeColor);
-
-        radius = typedArray.getInteger(R.styleable.ADPagerAtrrs_radius, 10);
         circlePageIndicator.setRadius(radius);
-
-        interval = typedArray.getInteger(R.styleable.ADPagerAtrrs_interval, 4000);
         autoScrollViewPager.setInterval(interval);
     }
 
@@ -85,6 +86,7 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         circlePageIndicator.setRadius(radius);
         return this;
     }
+
 
 
     /**

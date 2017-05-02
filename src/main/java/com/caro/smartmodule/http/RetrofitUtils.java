@@ -72,7 +72,6 @@ public class RetrofitUtils {
      * @return
      */
     public static <T> T createApi(final Context context, Class<T> clazz) {
-
         if (TextUtils.isEmpty(BASE_HOST)) {
             throw new RuntimeException("RetrofitUtils not instantiated yet,please init your BASE_HOST address");
         }

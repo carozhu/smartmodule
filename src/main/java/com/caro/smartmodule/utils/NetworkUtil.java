@@ -116,7 +116,7 @@ public class NetworkUtil {
     }
 
     /**
-     * wifi是否打开
+     * wifi是否打开且连接
      */
     public static boolean isWifiEnabled(Context context) {
         ConnectivityManager mgrConn = (ConnectivityManager) context
