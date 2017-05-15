@@ -75,8 +75,6 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
             Glide.with(context)
                     .load(imageList.get(position))
                     .centerCrop()
-                    //.placeholder(R.drawable.icon_loading)
-                    //.error(R.drawable.loaderror)
                     .crossFade()
                     .into(holder.imageView);
 
@@ -85,7 +83,7 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
                 public void onClick(View v) {
                     if(onViewClickListener !=null){
                         onViewClickListener.ViewClick(position);
-                        Toast.makeText(context,"imageView click position = "+position,Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });

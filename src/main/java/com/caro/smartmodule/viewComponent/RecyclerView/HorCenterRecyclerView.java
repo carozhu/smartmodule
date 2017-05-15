@@ -52,17 +52,4 @@ public class HorCenterRecyclerView extends RecyclerView {
             }
         }
     }
-
-    //    //固定宽度的居中方式
-    //    protected void onMeasure(int widthSpec, int heightSpec) {
-    //        if (getAdapter()==null) {
-    //            super.onMeasure(widthSpec, heightSpec);
-    //        } else {
-    //            int specHeight = MeasureSpec.getSize(heightSpec);
-    //            int maxHeight = MeasureSpec.makeMeasureSpec(specHeight, MeasureSpec.AT_MOST);
-    //            //item_data weidth:60dp
-    //            setMeasuredDimension(DensityUtil.dip2px(getContext(),60*getAdapter().getItemCount()), maxHeight);
-    //        }
-    //    }
-
 }

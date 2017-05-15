@@ -364,6 +364,7 @@ public class StatusBarUtil {
         setTranslucentForImageView(activity, DEFAULT_STATUS_BAR_ALPHA, needOffsetView);
     }
 
+
     /**
      * 为头部是 ImageView 的界面设置状态栏透明
      *

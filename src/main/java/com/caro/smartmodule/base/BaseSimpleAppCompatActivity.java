@@ -67,7 +67,7 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     private Dialog LoadingDialog;
     private Toolbar mToolbar;
     protected ActionBar actionBar = null;
-    private String themeColor = null;
+
 
 
     @Override
@@ -78,7 +78,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         /*must init helper*/
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
-        setStatusBar();
         swipeback(false);
         ActivityManageHelper.getInstance().addActivity(this);
 
@@ -102,7 +101,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     }
 
     public void swipeback(boolean swipebace) {
-        initViewStateBar(R.color.default_theme_app_color);
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
         mSwipeBackLayout = getSwipeBackLayout();
@@ -111,6 +109,11 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         mSwipeBackLayout.setEnableGesture(swipebace);
     }
 
+    /**
+     *
+     * @param swipebace
+     * @param primarycolor 设置状态栏颜色值
+     */
     public void swipeback(boolean swipebace, String primarycolor) {
         initViewGuideStateBar(primarycolor);
         mHelper = new SwipeBackActivityHelper(this);
@@ -120,7 +123,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         mSwipeBackLayout.setEnableGesture(swipebace);
 
-        themeColor = primarycolor;
     }
 
     /**
@@ -148,8 +150,8 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
 
     }
 
-    protected void setStatusBar() {
-        StatusBarUtil.setColor(this, Color.parseColor("#146e6e"));
+    protected void setStatusBarDefaultColor(String clolor) {
+        StatusBarUtil.setColor(this, Color.parseColor(clolor));
     }
 
     protected void setStatusBar(String color) {
@@ -665,6 +667,24 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         TextView titleView = (TextView) findViewById(R.id.toolbar_title);
         if (titleView != null) {
             titleView.setText(title);
+        }
+    }
+
+    /**
+     * 设置标题title字体颜色
+     * @param color
+     */
+    public void setTitleTextColor(int color){
+        TextView titleView = (TextView) findViewById(R.id.toolbar_title);
+        if (titleView != null) {
+            titleView.setTextColor(getResources().getColor(color));
+        }
+    }
+
+    public void setTitleTextRGBColor(int color){
+        TextView titleView = (TextView) findViewById(R.id.toolbar_title);
+        if (titleView != null) {
+            titleView.setTextColor(color);
         }
     }
 

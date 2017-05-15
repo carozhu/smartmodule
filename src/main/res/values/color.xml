@@ -19,6 +19,7 @@
 
     <!--通用字体颜色值-->
     <color name="common_normal_textcolor">#333333</color>
+    <color name="common_light_textcolor">#313131</color>
     <color name="common_grey_textcolor">#999999</color>
     <color name="common_red_textcolor">#fd0303</color>
 
@@ -43,7 +44,8 @@
     <color name="caterory_yellow_color">#eb6100</color>
     <color name="light_yellow_color">#80cff9</color>
     <color name="orange_yellow">#ff7900</color>
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
+    <string name="white">#ffffffff</string>
     <color name="blur_bg">#FFFAF0</color>
     <color name="black">#000000</color>
     <color name="grey">#808080</color>

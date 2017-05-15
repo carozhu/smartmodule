@@ -482,6 +482,20 @@ public class DateUtil {
         return hour;
     }
 
+
+    /**
+     * 根据年月日时分秒时间格式，得到现在小时
+     * @param formatTime 格式为：yyyy-MM-dd HH:mm:ss
+     * @return hour
+     */
+    public static String getDate(String formatTime){
+        Date nowDate = DateUtil.stringToDate(formatTime,"yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
+        String dateString = formatter.format(nowDate);
+        return dateString;
+    }
+
+
     /**
      * 根据系统时间判断当前时间是白天还是夜晚
      * @param context

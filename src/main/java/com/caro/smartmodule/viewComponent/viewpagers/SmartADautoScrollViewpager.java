@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -55,8 +56,29 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         fillColor = typedArray.getColor(R.styleable.ADPagerAtrrs_FillColor, Color.parseColor("#FFFFFF"));
 
         initView();
+
     }
 
+
+    public void setShowIndicator(boolean showIndicator){
+        this.showIndicator = showIndicator;
+    }
+
+    public void setInterval(int interval){
+        this.interval = interval;
+    }
+
+    public void setRadius(int radius){
+        this.radius = radius;
+    }
+
+    public void setStrokeColor(int strokeColor){
+        this.strokeColor = strokeColor;
+    }
+
+    public void setFillColor(int fillColor){
+        this.fillColor = fillColor;
+    }
 
     private void initView() {
         autoScrollViewPager = (AutoScrollViewPager) rootView.findViewById(R.id.autopager);
@@ -172,6 +194,4 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         return null;
 
     }
-
-
 }

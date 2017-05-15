@@ -50,12 +50,12 @@ public class NotificationManagerWrapper {
      * @param notifyID
      */
 
-    public void notifyBasicMessage(int notifyID,int smarllIconResId) {
+    public void notifySimpleMessage(int notifyID,int smarllIconResId,String mContentTitle,String mContentText) {
 
         // 设置通知的基本信息：icon、标题、内容
         builder.setSmallIcon(smarllIconResId);
-        builder.setContentTitle("My notification");
-        builder.setContentText("Hello World!");
+        builder.setContentTitle(mContentTitle);
+        builder.setContentText(mContentText);
         // 设置通知的优先级--浮动通知的展现形式
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
