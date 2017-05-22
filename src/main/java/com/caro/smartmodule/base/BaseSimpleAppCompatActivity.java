@@ -101,6 +101,7 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     }
 
     public void swipeback(boolean swipebace) {
+        initViewStateBar(R.color.default_theme_app_color);
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
         mSwipeBackLayout = getSwipeBackLayout();
@@ -141,12 +142,20 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
 
     }
 
+    /**
+     * you must set the state bar
+     * if you what to use swipe finish activity function.
+     *
+     * @param color
+     */
     public void initViewGuideStateBar(String color) {
 
         //设置状态栏透明
         StateBarTranslucentUtils.setStateBarTranslucent(this);
         //状态栏着色
         StateBarTranslucentUtils.setStateBarColor(this, color);
+
+
 
     }
 
@@ -618,6 +627,12 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     private OnToolbarOnNavigationClickListener mOnToolbarOnNavigationClickListener;
     public void setOnToolbarOnNavigationClickListener(OnToolbarOnNavigationClickListener mOnToolbarOnNavigationClickListener){
         this.mOnToolbarOnNavigationClickListener = mOnToolbarOnNavigationClickListener;
+    }
+
+
+    public Toolbar getToolbar(){
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        return mToolbar;
     }
     public interface OnToolbarOnNavigationClickListener{
         public void onNavToobarClick(View view);

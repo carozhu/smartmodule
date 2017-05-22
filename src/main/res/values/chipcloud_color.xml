@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_toggle_on">#ffcc00</color>
+    <color name="default_toggle_off">#eeeeee</color>
+    <color name="default_text">#222222</color>
+</resources>

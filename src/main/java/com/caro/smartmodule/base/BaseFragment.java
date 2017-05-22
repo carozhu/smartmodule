@@ -95,7 +95,6 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onResume(){
         super.onResume();
-        onLifeResume();
         Log.d(TAG, "fragment onResume: ");
 
     }
@@ -108,13 +107,11 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onStop(){
         super.onStop();
-        onLifeStop();
     }
 
     @Override
     public void onDestroy(){
         super.onDestroy();
-        onLifeDestroy();
     }
 
     /**
@@ -140,9 +137,6 @@ public abstract class BaseFragment extends Fragment{
      * @param savedInstanceState
      */
     protected abstract void onLifeCreateView(Bundle savedInstanceState);
-    protected abstract void onLifeResume();
-    protected abstract void onLifeStop();
-    protected abstract void onLifeDestroy();
 
     public void setContentView(int layoutResID) {
         try {

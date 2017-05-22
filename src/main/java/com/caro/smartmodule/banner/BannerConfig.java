@@ -21,7 +21,7 @@ public class BannerConfig {
     /**
      * banner
      */
-    public static final int INDICATOR_SIZE=20;
+    public static final int INDICATOR_SIZE=16;
     public static final int PADDING_SIZE=5;
     public static final int TIME=2000;
     public static final int DURATION=800;

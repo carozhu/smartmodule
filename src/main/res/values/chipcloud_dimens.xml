@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="chip_height">32dp</dimen>
+  <dimen name="inset_chip_height">38dp</dimen>
+  <dimen name="inset">3dp</dimen>
+  <dimen name="default_textsize">13sp</dimen>
+  <dimen name="min_horizontal_spacing">8dp</dimen>
+  <dimen name="vertical_spacing">8dp</dimen>
+</resources>

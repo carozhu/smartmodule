@@ -25,6 +25,9 @@ import java.lang.annotation.RetentionPolicy;
  * the {@link ViewState} accordingly
  * Every MultiStateView <b><i>MUST</i></b> contain a content view. The content view
  * is obtained from whatever is inside of the tags of the view via its XML declaration
+ * <!--must have a child view-->
+ * <!--java.lang.IllegalArgumentException: Content view is not defined-->
+ * <!--at com.kennyc.view.MultiStateView.onAttachedToWindow(MultiStateView.java:129)-->
  */
 public class MultiStateView extends FrameLayout {
 

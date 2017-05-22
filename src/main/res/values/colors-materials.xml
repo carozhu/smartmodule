@@ -274,7 +274,7 @@
 
     <!--grey-->
     <color name="md_grey_50">#FAFAFA</color>
-    <string name="md_grey_50">#FFECEFF1</string>
+    <string name="md_grey_50">#FFFAFAFA</string>
     <color name="md_grey_100">#F5F5F5</color>
     <color name="md_grey_200">#EEEEEE</color>
     <color name="md_grey_300">#E0E0E0</color>
