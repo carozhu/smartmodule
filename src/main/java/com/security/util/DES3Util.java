@@ -66,7 +66,7 @@ public class DES3Util {
     public static byte[] des3EncodeCBC(byte[] key, byte[] iv, byte[] data) {
         try {
             SecretKey DESKey = new SecretKeySpec(key, DES3);    //生成密钥
-            Cipher cipher = Cipher.getInstance(DES3 + "/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(DES3 + "/CBC/PKCS7Padding");
             IvParameterSpec ips = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, DESKey, ips);
             return cipher.doFinal(data);
@@ -83,7 +83,7 @@ public class DES3Util {
     public static byte[] des3DecodeCBC(byte[] key, byte[] iv, byte[] data) {
         try {
             SecretKey DESKey = new SecretKeySpec(key, DES3);    //生成密钥
-            Cipher cipher = Cipher.getInstance(DES3 + "/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(DES3 + "/CBC/PKCS7Padding");
             IvParameterSpec ips = new IvParameterSpec(iv);
             cipher.init(Cipher.DECRYPT_MODE, DESKey, ips);
             return cipher.doFinal(data);
@@ -99,7 +99,7 @@ public class DES3Util {
      *
      * @param keyStr 密钥字符串
      */
-    private static byte[] build3DesKey(String keyStr) {
+    public static byte[] build3DesKey(String keyStr) {
         try {
             byte[] key = new byte[24];    //声明一个24位的字节数组，默认里面都是0
             byte[] temp = keyStr.getBytes("UTF-8");    //将字符串转成字节数组
