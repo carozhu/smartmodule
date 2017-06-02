@@ -53,7 +53,7 @@ public class LoadingDialog {
 		Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);
 		// 设置返回键无效
 		loadingDialog.setCancelable(false);
-		loadingDialog.setCanceledOnTouchOutside(true);
+		loadingDialog.setCanceledOnTouchOutside(false);
 		loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 		loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
