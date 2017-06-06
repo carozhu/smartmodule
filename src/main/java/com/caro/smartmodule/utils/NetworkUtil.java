@@ -115,32 +115,18 @@ public class NetworkUtil {
         return accessibleProviders != null && accessibleProviders.size() > 0;
     }
 
-    /**
-     * wifi是否打开且连接
-     */
-    public static boolean isWifiEnabled(Context context) {
-        ConnectivityManager mgrConn = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        TelephonyManager mgrTel = (TelephonyManager) context
-                .getSystemService(Context.TELEPHONY_SERVICE);
-        return ((mgrConn.getActiveNetworkInfo() != null && mgrConn
-                .getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED) || mgrTel
-                .getNetworkType() == TelephonyManager.NETWORK_TYPE_UMTS);
-    }
+
 
     /**
-     * 判断当前网络是否是wifi网络
-     * if(activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE) {
+     * 判断当前网络是否是wifi网络并且已连接
      *
      * @param context
      * @return boolean
      */
-    public static boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isWifiEnabled(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetInfo != null
-                && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+        if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI && connectivityManager.getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED) {
             return true;
         }
         return false;
