@@ -1,6 +1,10 @@
 package com.caro.smartmodule.viewComponent;
 
 import android.content.Context;
+<<<<<<< HEAD
+=======
+import android.support.v4.view.ViewPager;
+>>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -47,14 +51,32 @@ public class AdvertView  extends RelativeLayout{
     ImageView imageView;
 
     public void showBanner(ArrayList<String> imgeList){
-//        imageView = new ImageView(mContext);
-//        imageView.setBackgroundColor(mContext.getResources().getColor(R.color.actionbar_bg));
-//        imageView.setLayoutParams(params);
-//        this.addView(imageView);
+<<<<<<< HEAD
+=======
 
         banner = new SmartADautoScrollViewpager(mContext);
         banner.setLayoutParams(params);
         banner.loadDataAndShowADPager(imgeList);
+        this.addView(banner);
+        showView(this);
+>>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
+//        imageView = new ImageView(mContext);
+//        imageView.setBackgroundColor(mContext.getResources().getColor(R.color.actionbar_bg));
+//        imageView.setLayoutParams(params);
+//        this.addView(imageView);
+<<<<<<< HEAD
+
+        banner = new SmartADautoScrollViewpager(mContext);
+        banner.setLayoutParams(params);
+        banner.loadDataAndShowADPager(imgeList);
+=======
+    }
+
+    public void showGifBanner(ArrayList<ImageBase> imgeList){
+        banner = new SmartADautoScrollViewpager(mContext);
+        banner.setLayoutParams(params);
+        banner.loadDataAndShowADPager(imgeList,0);
+>>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
         this.addView(banner);
         showView(this);
     }

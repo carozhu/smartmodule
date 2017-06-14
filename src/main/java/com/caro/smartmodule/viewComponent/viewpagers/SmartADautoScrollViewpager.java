@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.caro.smartmodule.R;
+import com.caro.smartmodule.viewComponent.ImageBase;
 import com.caro.smartmodule.viewComponent.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -62,12 +63,21 @@ public class SmartADautoScrollViewpager extends LinearLayout {
 
     public void setShowIndicator(boolean showIndicator){
         this.showIndicator = showIndicator;
+<<<<<<< HEAD
     }
 
     public void setInterval(int interval){
         this.interval = interval;
     }
 
+=======
+    }
+
+    public void setInterval(int interval){
+        this.interval = interval;
+    }
+
+>>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
     public void setRadius(int radius){
         this.radius = radius;
     }
@@ -174,6 +184,43 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         APA.setOnViewClickListener(mOnViewClickListener);
         return this;
     }
+
+
+    /**
+     * @param imageUrlList
+     * @return
+     */
+    public SmartADautoScrollViewpager loadDataAndShowADPager(ArrayList<ImageBase> imageUrlList, int type) {
+        if (imageUrlList == null) {
+            return this;
+        }
+
+        if (imageUrlList.size() == 0) {
+            return this;
+        }
+
+        ADImagePagerAdapter APA = new ADImagePagerAdapter(context, imageUrlList,type);
+        autoScrollViewPager.setAdapter(APA);
+
+        //autoScrollViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        //circlePageIndicator.setFillColor(context.getResources().getColor(R.color.orange_yellow));
+        //circlePageIndicator.setStrokeColor(context.getResources().getColor(R.color.white));
+        //circlePageIndicator.setRadius(10);
+        //autoScrollViewPager.setInterval(Interval);
+
+        circlePageIndicator.setViewPager(autoScrollViewPager);
+        if (imageUrlList.size() > 1) {
+            circlePageIndicator.setVisibility(View.VISIBLE);
+        } else {
+            circlePageIndicator.setVisibility(View.GONE);
+        }
+        autoScrollViewPager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
+        autoScrollViewPager.startAutoScroll();
+
+        return this;
+    }
+
+
     /**
      * stop scroll
      *

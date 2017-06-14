@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.caro.smartmodule.R;
+import com.caro.smartmodule.viewComponent.ImageBase;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
 
     private Context context;
     private List<String> imageList;
+    private List<ImageBase> dataList;
     private int           size;
     private boolean       isInfiniteLoop;
     public OnViewClickListener onViewClickListener;
@@ -33,6 +36,13 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
         isInfiniteLoop = false;
 
     }
+
+    public ADImagePagerAdapter(Context context, List<ImageBase> dataList,int type){
+        this.context=context;
+        this.dataList=dataList;
+        this.size = getSize(dataList);
+        isInfiniteLoop = false;
+    }
     public void setOnViewClickListener(OnViewClickListener mOnViewClickListener) {
         this.onViewClickListener = mOnViewClickListener;
     }
@@ -43,7 +53,7 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
     @Override
     public int getCount() {
         // Infinite loop
-        return isInfiniteLoop ? Integer.MAX_VALUE : getSize(imageList);
+        return isInfiniteLoop ? Integer.MAX_VALUE : imageList == null ? getSize(dataList) : getSize(imageList);
     }
 
     /**
@@ -72,11 +82,41 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
 
         if (imageList!=null && imageList.size()>0){
             holder.imageView.setTag(imageList.get(position));
+<<<<<<< HEAD
             Glide.with(context)
                     .load(imageList.get(position))
                     .centerCrop()
                     .crossFade()
                     .into(holder.imageView);
+=======
+
+                Glide.with(context)
+                        .load(imageList.get(position))
+                        .centerCrop()
+                        .crossFade()
+                        .into(holder.imageView);
+
+        }
+
+        if(dataList!=null && dataList.size()>0){
+            ImageBase  base =  dataList.get(position);
+            if(base.getType() == 1){
+                Glide.with(context)
+                        .load(base.getUrl())
+                        .centerCrop()
+                        .crossFade()
+                        .into(holder.imageView);
+            }else if(base.getType() == 2){
+                Glide.with(context)
+                        .load(base.getUrl())
+                        .asGif()
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .into(holder.imageView);
+            }
+        }
+
+                //Glide.with(MainActivity.this).load(url).into(new GlideDrawableImageViewTarget(imageview, 1));
+>>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
 
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,8 +127,6 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
                     }
                 }
             });
-        }
-
 
         return view;
     }
