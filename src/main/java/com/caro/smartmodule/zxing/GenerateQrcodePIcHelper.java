@@ -151,7 +151,7 @@ public class GenerateQrcodePIcHelper {
                         if (bitMatrix.get(x, y)) {
                             pixels[y * size + x] = 0xff000000;
                         } else {
-                            pixels[y * size + x] = 0xEEEEEEEE;//灰色--md_grey_200
+                            pixels[y * size + x] = 0xFFFFFFFF;//灰色-- 0xEEEEEEEE md_grey_200
                         }
                     }
                 }

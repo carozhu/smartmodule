@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text="按到"
             android:gravity="left"
-            android:singleLine="true"
+            android:maxLines="1"
             android:maxLength="25"
             android:ellipsize="middle"
             android:textSize="13sp" />

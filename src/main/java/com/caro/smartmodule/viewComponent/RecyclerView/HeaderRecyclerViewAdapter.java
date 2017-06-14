@@ -16,10 +16,13 @@ public abstract class HeaderRecyclerViewAdapter<VH extends RecyclerView.ViewHold
     protected static final int TYPE_HEADER = -2;
     protected static final int TYPE_ITEM = -1;
     protected static final int TYPE_FOOTER = -3;
+    protected static final int NOITEM_TYPE_ITEM = -4;
 
     private H header;
     private List<T> items = Collections.EMPTY_LIST;
     private F footer;
+    private Object noItem;
+
     private boolean showFooter = true;
 
     /**

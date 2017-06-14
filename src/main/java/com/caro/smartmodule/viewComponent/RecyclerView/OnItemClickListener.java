@@ -11,10 +11,5 @@ public interface OnItemClickListener {
      */
     void onItemClick(View view, int position);
 
-    /**
-     * 删除按钮回调
-     *
-     * @param position
-     */
-    void onDeleteClick(int position);
+
 }

@@ -2,6 +2,7 @@ package com.caro.smartmodule.common.loadingmanager;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,10 +53,14 @@ public class LoadingDialog {
 		Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);
 		// 设置返回键无效
 		loadingDialog.setCancelable(false);
-		//loadingDialog.setCancelable(true);
 		loadingDialog.setCanceledOnTouchOutside(false);
 		loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-
+		loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialogInterface) {
+				// TODO: 取消网络请求
+			}
+		});
 		return loadingDialog;
 	}
 

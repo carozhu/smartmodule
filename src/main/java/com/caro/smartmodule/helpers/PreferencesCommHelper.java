@@ -42,32 +42,6 @@ public class PreferencesCommHelper {
 
     }
 
-    /**
-     * get string from sp
-     *
-     * @param mContext
-     * @return
-     */
-    public static String getCurUsernickname(Context mContext) {
-        SharedPreferences sp = (SharedPreferences) mContext.getSharedPreferences(AppInfoUtil.getAppName(mContext), 0);
-        String s = sp.getString("nickname", "");
-        return s;
-    }
-
-
-    /**
-     * 保存的用户名是没有经过服务器处理的,是用户输入的简单的用户账户名
-     *
-     * @param mContext
-     * @return
-     */
-    public static void saveCurUsernickname(Context mContext, String nickname) {
-        SharedPreferences sp = (SharedPreferences) mContext.getSharedPreferences(AppInfoUtil.getAppName(mContext), 0);
-        sp.edit().putString("nickname", nickname).commit();
-
-    }
-
-
 
     /**
      * @param mContext

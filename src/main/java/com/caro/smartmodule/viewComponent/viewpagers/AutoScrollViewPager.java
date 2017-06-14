@@ -75,6 +75,9 @@ public class AutoScrollViewPager extends ViewPager {
 
     public static final int        SCROLL_WHAT                 = 0;
 
+    /**   if you want to touch events  direct go out .please set true .default is false for inner viewpager to srcoll       **/
+    private boolean touchEventsPost                            = false;
+
     public AutoScrollViewPager(Context paramContext) {
         super(paramContext);
         init();
@@ -187,8 +190,11 @@ public class AutoScrollViewPager extends ViewPager {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        int action = MotionEventCompat.getActionMasked(ev);
+        if (isTouchEventsPost()){
+            return true;
+        }
 
+        int action = MotionEventCompat.getActionMasked(ev);
         if (stopScrollWhenTouch) {
             if ((action == MotionEvent.ACTION_DOWN) && isAutoScroll) {
                 isStopByTouch = true;
@@ -227,6 +233,14 @@ public class AutoScrollViewPager extends ViewPager {
         getParent().requestDisallowInterceptTouchEvent(true);
 
         return super.dispatchTouchEvent(ev);
+    }
+
+    public boolean isTouchEventsPost() {
+        return touchEventsPost;
+    }
+
+    public void setTouchEventsPost(boolean touchEventsPost) {
+        this.touchEventsPost = touchEventsPost;
     }
 
     private static class MyHandler extends Handler {

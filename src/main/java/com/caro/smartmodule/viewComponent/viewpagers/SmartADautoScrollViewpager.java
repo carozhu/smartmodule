@@ -5,10 +5,12 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.caro.smartmodule.R;
+import com.caro.smartmodule.viewComponent.ImageBase;
 import com.caro.smartmodule.viewComponent.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -55,8 +57,29 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         fillColor = typedArray.getColor(R.styleable.ADPagerAtrrs_FillColor, Color.parseColor("#FFFFFF"));
 
         initView();
+
     }
 
+
+    public void setShowIndicator(boolean showIndicator){
+        this.showIndicator = showIndicator;
+    }
+
+    public void setInterval(int interval){
+        this.interval = interval;
+    }
+
+    public void setRadius(int radius){
+        this.radius = radius;
+    }
+
+    public void setStrokeColor(int strokeColor){
+        this.strokeColor = strokeColor;
+    }
+
+    public void setFillColor(int fillColor){
+        this.fillColor = fillColor;
+    }
 
     private void initView() {
         autoScrollViewPager = (AutoScrollViewPager) rootView.findViewById(R.id.autopager);
@@ -152,6 +175,43 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         APA.setOnViewClickListener(mOnViewClickListener);
         return this;
     }
+
+
+    /**
+     * @param imageUrlList
+     * @return
+     */
+    public SmartADautoScrollViewpager loadDataAndShowADPager(ArrayList<ImageBase> imageUrlList, int type) {
+        if (imageUrlList == null) {
+            return this;
+        }
+
+        if (imageUrlList.size() == 0) {
+            return this;
+        }
+
+        ADImagePagerAdapter APA = new ADImagePagerAdapter(context, imageUrlList,type);
+        autoScrollViewPager.setAdapter(APA);
+
+        //autoScrollViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        //circlePageIndicator.setFillColor(context.getResources().getColor(R.color.orange_yellow));
+        //circlePageIndicator.setStrokeColor(context.getResources().getColor(R.color.white));
+        //circlePageIndicator.setRadius(10);
+        //autoScrollViewPager.setInterval(Interval);
+
+        circlePageIndicator.setViewPager(autoScrollViewPager);
+        if (imageUrlList.size() > 1) {
+            circlePageIndicator.setVisibility(View.VISIBLE);
+        } else {
+            circlePageIndicator.setVisibility(View.GONE);
+        }
+        autoScrollViewPager.setSlideBorderMode(AutoScrollViewPager.SLIDE_BORDER_MODE_TO_PARENT);
+        autoScrollViewPager.startAutoScroll();
+
+        return this;
+    }
+
+
     /**
      * stop scroll
      *
@@ -172,6 +232,4 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         return null;
 
     }
-
-
 }

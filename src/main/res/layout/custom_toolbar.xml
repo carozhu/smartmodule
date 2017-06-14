@@ -9,11 +9,7 @@
     android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:theme="@style/ToorbarTheme.AppBarOverlay"
-    app:popupTheme="@style/ToorbarTheme.PopupOverlay"
-  >
-
-    <!--  android:theme="@style/ToorbarTheme.AppBarOverlay"
-    app:popupTheme="@style/ToorbarTheme.PopupOverlay"-->
+    app:popupTheme="@style/ToorbarTheme.PopupOverlay">
 
     <!-- Back text -->
     <TextView
@@ -32,7 +28,7 @@
         android:layout_gravity="center"
         android:gravity="center_vertical"
         android:textColor="@color/md_white_1000"
-        android:textSize="19sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         tools:text="@string/app_name"/>
 
