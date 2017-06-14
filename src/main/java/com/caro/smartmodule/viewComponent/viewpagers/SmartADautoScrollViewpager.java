@@ -63,21 +63,12 @@ public class SmartADautoScrollViewpager extends LinearLayout {
 
     public void setShowIndicator(boolean showIndicator){
         this.showIndicator = showIndicator;
-<<<<<<< HEAD
     }
 
     public void setInterval(int interval){
         this.interval = interval;
     }
 
-=======
-    }
-
-    public void setInterval(int interval){
-        this.interval = interval;
-    }
-
->>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
     public void setRadius(int radius){
         this.radius = radius;
     }

@@ -82,19 +82,12 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
 
         if (imageList!=null && imageList.size()>0){
             holder.imageView.setTag(imageList.get(position));
-<<<<<<< HEAD
+
             Glide.with(context)
                     .load(imageList.get(position))
                     .centerCrop()
                     .crossFade()
                     .into(holder.imageView);
-=======
-
-                Glide.with(context)
-                        .load(imageList.get(position))
-                        .centerCrop()
-                        .crossFade()
-                        .into(holder.imageView);
 
         }
 
@@ -115,18 +108,17 @@ public class ADImagePagerAdapter extends RecyclingPagerAdapter {
             }
         }
 
-                //Glide.with(MainActivity.this).load(url).into(new GlideDrawableImageViewTarget(imageview, 1));
->>>>>>> 364f5bcb6f6fa0998dc5aa9ae778fdfd58e9c715
+        //Glide.with(MainActivity.this).load(url).into(new GlideDrawableImageViewTarget(imageview, 1));
 
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(onViewClickListener !=null){
-                        onViewClickListener.ViewClick(position);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onViewClickListener !=null){
+                    onViewClickListener.ViewClick(position);
 
-                    }
                 }
-            });
+            }
+        });
 
         return view;
     }
