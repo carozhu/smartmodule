@@ -398,7 +398,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     }
 
     public View getRootView() {
-
         return activity.getWindow().getDecorView().findViewById(android.R.id.content);
     }
 

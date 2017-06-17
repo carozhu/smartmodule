@@ -4,8 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DeviceUuidFactory {
     protected static final String PREFS_FILE = "device_id.xml";
@@ -66,7 +70,18 @@ public class DeviceUuidFactory {
      *
      * @return a UUID that may be used to uniquely identify your device for most purposes.
      */
-    public UUID getDeviceUuid() {
+    private UUID getDeviceUUID() {
         return uuid;
+    }
+
+    public String getDeviceUuid() {
+        final String uuid = getDeviceUUID().toString().trim();
+        if (TextUtils.isEmpty(uuid)){
+            return null;
+        }
+        Pattern p = Pattern.compile("\t|\r|\n");//去掉换行，回车，和制表符
+        Matcher m = p.matcher(uuid);
+        final String destuuid = m.replaceAll("");
+        return destuuid;
     }
 }
