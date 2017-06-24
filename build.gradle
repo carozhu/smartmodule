@@ -137,7 +137,8 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
 
     /*权限检测Rx，以下只有一个目前在用。其他3个待比较后clear掉*/
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+
     compile 'com.karumi:dexter:2.2.2'//dextre 权限检测
     compile "com.github.hotchemi:permissionsdispatcher:${rootProject.ext.permissionsDispatcherVersion}"
     apt "com.github.hotchemi:permissionsdispatcher-processor:${rootProject.ext.permissionsDispatcherVersion}"

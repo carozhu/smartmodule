@@ -75,22 +75,23 @@ public class DownloadService extends Service {
 
         //检查存储权限
         //批量获取权限测试-->定位，录音，摄像头，存储读写,获取device_id
-        RxPermissions.getInstance(this).request(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean granted) {
-                        if (granted) {
-                            blnPermission = true;
-                        } else {
-                            blnPermission = false;
-                        }
-                    }
-                });
-        if (!blnPermission) {
-            return;
-        }
+//        RxPermissions rxPermissions = new RxPermissions(this);
+//        RxPermissions.getInstance(this).request(
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                .subscribe(new Action1<Boolean>() {
+//                    @Override
+//                    public void call(Boolean granted) {
+//                        if (granted) {
+//                            blnPermission = true;
+//                        } else {
+//                            blnPermission = false;
+//                        }
+//                    }
+//                });
+//        if (!blnPermission) {
+//            return;
+//        }
 
         mConnectMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mDownloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
