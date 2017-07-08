@@ -38,17 +38,7 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name="com.caro.smartmodule.http.DownloadService$DownloadManagerReceiver">
-            <intent-filter>
-                <!-- 配置 点击通知 和 下载完成 两个 action -->
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
-            </intent-filter>
-        </receiver>
 
-        <service
-            android:name=".http.DownloadService"
-            android:enabled="true" />
 
     </application>
 

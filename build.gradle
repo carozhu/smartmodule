@@ -147,7 +147,7 @@ dependencies {
     compile 'org.greenrobot:greendao:3.1.0'
 
     //图片处理
-    compile 'top.zibin:Luban:1.0.8'  /*https://github.com/Curzibn/Luban 图片压缩算法*/
+    compile 'top.zibin:Luban:1.1.2'  /*https://github.com/Curzibn/Luban 图片压缩算法*/
     compile 'com.isseiaoki:simplecropview:1.1.4'/*simplecropview图片裁剪*/
     compile "com.github.bumptech.glide:glide:${rootProject.ext.GlideVersion}" //Glide
 

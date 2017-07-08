@@ -39,7 +39,7 @@
         android:id="@+id/rightTitle"
         android:text="right Title"
         android:textColor="@color/md_white_1000"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginRight="15dp"
         android:layout_gravity="center|right"/>
