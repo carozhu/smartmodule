@@ -69,7 +69,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
     protected ActionBar actionBar = null;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -220,26 +219,6 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
 
     }
 
-    public void resetFragmentView(Fragment fragment) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            View contentView = findViewById(android.R.id.content);
-            if (contentView != null) {
-                ViewGroup rootView;
-                rootView = (ViewGroup) ((ViewGroup) contentView).getChildAt(0);
-                if (rootView.getPaddingTop() != 0) {
-                    rootView.setPadding(0, 0, 0, 0);
-                }
-            }
-            if (fragment.getView() != null)
-                fragment.getView().setPadding(0, getStatusBarHeight(this), 0, 0);
-        }
-    }
-
-    private static int getStatusBarHeight(Context context) {
-        // 获得状态栏高度
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        return context.getResources().getDimensionPixelSize(resourceId);
-    }
 
     /**
      * @param resColorID
@@ -628,14 +607,16 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         this.mOnToolbarOnNavigationClickListener = mOnToolbarOnNavigationClickListener;
     }
 
+    public interface OnToolbarOnNavigationClickListener{
+        public void onNavToobarClick(View view);
+    }
+
 
     public Toolbar getToolbar(){
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         return mToolbar;
     }
-    public interface OnToolbarOnNavigationClickListener{
-        public void onNavToobarClick(View view);
-    }
+
     /**
      * 针对不是Custom title bar 的布局
      * @param resid
