@@ -24,7 +24,7 @@ public class BaseApplication extends Application {
 //        }
         super.onCreate();
         setContext(getApplicationContext());
-        Dexter.initialize(this);//dex拆分
+        Dexter.initialize(this);
     }
 
     @Override
