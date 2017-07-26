@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
     android:theme="@style/ToorbarTheme.AppBarOverlay"
     app:popupTheme="@style/ToorbarTheme.PopupOverlay">
 
@@ -18,7 +17,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:textColor="@color/md_white_1000"
-        tools:text="Overview"/>
+        tools:text="Overview" />
 
     <!-- This is a centered title -->
     <TextView
@@ -27,20 +26,20 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center_vertical"
+        android:text="@string/app_name"
         android:textColor="@color/md_white_1000"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/app_name"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/rightTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rightTitle"
+        android:layout_gravity="center|right"
+        android:layout_marginRight="15dp"
         android:text="right Title"
         android:textColor="@color/md_white_1000"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginRight="15dp"
-        android:layout_gravity="center|right"/>
+        android:visibility="gone" />
 </android.support.v7.widget.Toolbar>
