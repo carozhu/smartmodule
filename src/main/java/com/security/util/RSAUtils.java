@@ -45,6 +45,7 @@ public final class RSAUtils
 	private final static String KEY_PAIR = "RSA";
 	private final static String CIPHER = "RSA/ECB/PKCS1Padding";
 
+
 	/**
 	 * 随机生成RSA密钥对(默认密钥长度为1024)
 	 * 
