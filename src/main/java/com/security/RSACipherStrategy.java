@@ -23,8 +23,6 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 
-
-
 public class RSACipherStrategy extends CipherStrategy {
 
 	private PublicKey mPublicKey;

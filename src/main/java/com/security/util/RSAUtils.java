@@ -34,8 +34,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
-
-
 /**
  * @author Mr.Zheng
  * @date 2014年8月22日 下午1:44:23
@@ -44,7 +42,6 @@ public final class RSAUtils
 {
 	private final static String KEY_PAIR = "RSA";
 	private final static String CIPHER = "RSA/ECB/PKCS1Padding";
-
 
 	/**
 	 * 随机生成RSA密钥对(默认密钥长度为1024)
@@ -283,7 +280,7 @@ public final class RSAUtils
 	 * 从文件中加载私钥
 	 * 
 	 * @param
-	 *         in   私钥文件名  InputStream
+	 *            私钥文件名
 	 * @return 是否成功
 	 * @throws Exception
 	 */
@@ -328,25 +325,6 @@ public final class RSAUtils
 		}
 
 		return sb.toString();
-	}
-
-
-	/**
-	 * 私钥加密   公钥解密 更多请参考
-	 * 参考:http://www.cnblogs.com/whoislcj/p/5470095.html
-	 * @param data       待加密数据
-	 * @param privateKey 密钥
-	 * @return byte[] 加密数据
-	 */
-	public static byte[] encryptByPrivateKey(byte[] data, byte[] privateKey) throws Exception {
-		// 得到私钥
-		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKey);
-		KeyFactory kf = KeyFactory.getInstance(KEY_PAIR);
-		PrivateKey keyPrivate = kf.generatePrivate(keySpec);
-		// 数据加密
-		Cipher cipher = Cipher.getInstance(CIPHER);
-		cipher.init(Cipher.ENCRYPT_MODE, keyPrivate);
-		return cipher.doFinal(data);
 	}
 
 }

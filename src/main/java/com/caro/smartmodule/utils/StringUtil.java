@@ -878,4 +878,28 @@ public class StringUtil {
         System.out.print("\n");
     }
 
+    /**
+     * 将字符串转分段成数组
+     * @param sourceString
+     * @param squrelen
+     * @return
+     */
+    private List<String> splitSqureString(String sourceString, int squrelen) {
+        int lengs = sourceString.length() / squrelen;
+        int lesslens = sourceString.length() % squrelen;
+        Log.i("splitSqureString", "lengs == " + lengs + "  sslens == " + lesslens);
+        List<String> stringList = new ArrayList<String>();
+        for (int l = 0; l < lengs; l++) {
+            String subtemp = sourceString.substring(l * squrelen, l * squrelen + squrelen);
+            stringList.add(subtemp);
+        }
+        if (lesslens > 0) {
+            String subtemp = sourceString.substring(lengs * squrelen, lengs * squrelen + lesslens);
+            stringList.add(subtemp);
+        }
+
+        return stringList;
+    }
+
+
 }
