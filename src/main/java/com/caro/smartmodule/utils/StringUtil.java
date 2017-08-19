@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.caro.smartmodule.utils.BytesUtils.bytesToHexString;
+
 /**
  * Description the class 字符串工具类
  *
@@ -530,24 +532,6 @@ public class StringUtil {
     }
 
 
-    /**
-     * from
-     **/
-
-    private static String key2 = "finddreams";
-    private static String key1 = "13245";
-    /**
-     * 年月日时分秒
-     */
-    public final static String FORMAT_YMDHMS = "yyyy-MM-dd kk:mm:ss";
-
-    /**
-     * 获得当前时间
-     */
-    public static CharSequence currentTime(CharSequence inFormat) {
-        return DateFormat.format(inFormat, System.currentTimeMillis());
-    }
-
 
     public static String getWebCon(String domain) {
         // System.out.println("开始读取内容...("+domain+")");
@@ -672,7 +656,7 @@ public class StringUtil {
      * @param password
      * @return
      */
-    public static String encryptionKey(String password) {
+    public static String encryptionKey(String key1 ,String key2 ,String password) {
         byte[] keyByte1 = key1.getBytes();
         byte[] keyByte2 = key2.getBytes();
         byte[] pwdByte = password.getBytes();
@@ -698,10 +682,9 @@ public class StringUtil {
      * @param password
      * @return
      */
-    public static String decryptionKey(String password) {
+    public static String decryptionKey(String key1 ,String key2 ,String password) {
         byte[] keyByte1 = key1.getBytes();
         byte[] keyByte2 = key2.getBytes();
-        //password = hexStr2Str(password);
         byte[] pwdByte = hexStr2Bytes(password);
 
         for (int i = 0; i < pwdByte.length; i++) {
@@ -719,24 +702,6 @@ public class StringUtil {
         return new String(lastByte);
     }
 
-
-    /**
-     * 把字节数组转换成16进制字符串
-     *
-     * @param bArray
-     * @return
-     */
-    public static final String bytesToHexString(byte[] bArray) {
-        StringBuffer sb = new StringBuffer(bArray.length);
-        String sTemp;
-        for (int i = 0; i < bArray.length; i++) {
-            sTemp = Integer.toHexString(0xFF & bArray[i]);
-            if (sTemp.length() < 2)
-                sb.append(0);
-            sb.append(sTemp.toUpperCase());
-        }
-        return sb.toString();
-    }
 
     /**
      * 十六进制转换字符串

@@ -102,8 +102,10 @@ public class ThreeDESUtil {
         return bOut;
     }
 
+
     /**
-     * simple
+     * debug
+     * note:3DES的加密key如果太长（如PHP端生成传）。会出现问题
      * @param args
      * @throws Exception
      */
@@ -122,5 +124,15 @@ public class ThreeDESUtil {
 
         byte[] str6 = des3DecodeCBC(key, keyiv, str5);
         StringUtil.printHexString(str6);
+    }
+
+
+    public static String encryptionCode(String code) throws Exception{
+        byte[] key = "6C4E60E55552386C759569836DC0F83869836DC0F838C0F7".getBytes();
+        byte[] keyiv = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        byte[] data = code.getBytes("UTF-8");
+        byte[] str5 = des3EncodeCBC(key, keyiv, data);
+        String encryptedString = Base64.encodeToString(str5, Base64.DEFAULT);
+        return encryptedString;
     }
 }

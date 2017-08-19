@@ -1,10 +1,10 @@
 package com.caro.smartmodule.utils;
 
-import android.app.Activity;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ParseException;
-import android.util.Log;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
