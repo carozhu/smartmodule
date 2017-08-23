@@ -232,4 +232,14 @@ public class SmartADautoScrollViewpager extends LinearLayout {
         return null;
 
     }
+
+    /**
+     * hide circlePageIndicator
+     * @return
+     */
+    public SmartADautoScrollViewpager hideCirclePageIndicator(){
+        if (circlePageIndicator!=null)
+            circlePageIndicator.setVisibility(GONE);
+        return this;
+    }
 }
