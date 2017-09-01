@@ -1,10 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'android-apt'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.butterknife'
-
 buildscript {
     repositories {
         maven { url 'https://jitpack.io' }
@@ -142,7 +141,7 @@ dependencies {
 
     compile 'com.karumi:dexter:2.2.2'//dextre 权限检测
     compile "com.github.hotchemi:permissionsdispatcher:${rootProject.ext.permissionsDispatcherVersion}"
-    apt "com.github.hotchemi:permissionsdispatcher-processor:${rootProject.ext.permissionsDispatcherVersion}"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${rootProject.ext.permissionsDispatcherVersion}"
 
     /*数据库*/
     compile 'org.greenrobot:greendao:3.1.0'
@@ -154,7 +153,7 @@ dependencies {
 
 
     /*androidannotations框架*/
-    apt 'org.androidannotations:androidannotations:3.2'
+    annotationProcessor 'org.androidannotations:androidannotations:3.2'
     compile 'org.androidannotations:androidannotations-api:3.2'
 
     /*沉侵式状态栏SystemBarTint*/
