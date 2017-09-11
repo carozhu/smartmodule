@@ -10,6 +10,13 @@ public class ConfigureManager {
     private int appThemeColor = 0xFF469a84;//default themeColor
     private static ConfigureManager instance=null;
     private boolean okhttpCache = false;
+    private boolean okhttpLogger = true;
+
+    public boolean isOkhttpLogger() {
+        return okhttpLogger;
+    }
+
+
 
     public static  ConfigureManager getConfigureManager(){
         if (instance == null){
@@ -34,5 +41,9 @@ public class ConfigureManager {
 
     public void setOkhttpCache(boolean okhttpCache) {
         this.okhttpCache = okhttpCache;
+    }
+
+    public void setOkhttpLogger(boolean okhttpLogger) {
+        this.okhttpLogger = okhttpLogger;
     }
 }

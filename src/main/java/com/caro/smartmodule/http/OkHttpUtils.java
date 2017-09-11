@@ -61,9 +61,12 @@ public class OkHttpUtils {
                     //addNetworkInterceptor 让所有网络请求都附上你的拦截器，
                     //如这里设置了一个 token 拦截器，就是在所有网络请求的 header 加上 token 参数，下面会稍微讲一下这个内容
 
-                    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-                    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                    singleton.addInterceptor(interceptor);
+                    if ( ConfigureManager.getConfigureManager().isOkhttpLogger()){
+                        //HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                        //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                        //singleton.addInterceptor(interceptor);
+                    }
+
 
                     //在配置config中设置开关.默认关闭缓存  ---- 以下缓存策略有时候会-504
 //                    if (ConfigureManager.getConfigureManager().isOkhttpCache()) {
