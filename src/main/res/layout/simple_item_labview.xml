@@ -31,7 +31,7 @@
             android:paddingBottom="4dp"
             android:paddingRight="10dp"
             android:paddingTop="4dp"
-            android:text="lable"
+            android:text="访问社区"
             android:textSize="16sp" />
 
         <View
@@ -43,10 +43,11 @@
             android:id="@+id/tv_item_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="按到"
+            android:layout_marginLeft="0dp"
+            android:text="深圳市还挺早撒旦撒多撒；可怕我怕卡片上；澳康达十点多了澳柯玛"
             android:gravity="left"
             android:maxLines="1"
-            android:maxLength="25"
+            android:maxLength="15"
             android:ellipsize="middle"
             android:textSize="13sp" />
 

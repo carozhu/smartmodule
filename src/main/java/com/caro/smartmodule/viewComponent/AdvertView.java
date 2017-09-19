@@ -54,10 +54,12 @@ public class AdvertView  extends RelativeLayout{
         banner.loadDataAndShowADPager(imgeList);
         this.addView(banner);
         showView(this);
-//        imageView = new ImageView(mContext);
-//        imageView.setBackgroundColor(mContext.getResources().getColor(R.color.actionbar_bg));
-//        imageView.setLayoutParams(params);
-//        this.addView(imageView);
+        /*
+        imageView = new ImageView(mContext);
+        imageView.setBackgroundColor(mContext.getResources().getColor(R.color.actionbar_bg));
+        imageView.setLayoutParams(params);
+        this.addView(imageView);
+        */
     }
 
     public void showGifBanner(ArrayList<ImageBase> imgeList){
@@ -65,7 +67,9 @@ public class AdvertView  extends RelativeLayout{
         banner.setLayoutParams(params);
         banner.loadDataAndShowADPager(imgeList,0);
         this.addView(banner);
-        showView(this);
+        banner.hideCirclePageIndicator();
+        //showView(this);
+        banner.getAutoViewpager().startAutoScroll(8000);
     }
 
 
@@ -74,16 +78,16 @@ public class AdvertView  extends RelativeLayout{
     }
 
 
-    long durationMillis = 2000, delayMillis = 0;
+    long durationMillis = 8000, delayMillis = 0;
 
     public void showView(View viewIn){
 
-        animationController.fadeIn(viewIn, durationMillis, delayMillis);
+        animationController.fadeOut(viewIn, durationMillis, delayMillis);
     }
 
     public void hindeView(View viewOut){
 
-        animationController.fadeOut(viewOut, durationMillis, delayMillis);
+        animationController.fadeIn(viewOut, durationMillis, delayMillis);
     }
 
 

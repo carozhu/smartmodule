@@ -101,6 +101,22 @@ public final class RSAUtils
 		}
 	}
 
+	public static byte[] encryptData(byte[] data, PrivateKey privateKey)
+	{
+		try
+		{
+			Cipher cipher = Cipher.getInstance(CIPHER);
+			// 编码前设定编码方式及密钥
+			cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+			// 传入编码数据并返回编码结果
+			return cipher.doFinal(data);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	/**
 	 * 用私钥解密
 	 * 
@@ -117,6 +133,19 @@ public final class RSAUtils
 			Cipher cipher = Cipher.getInstance(CIPHER);
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
 			return cipher.doFinal(encryptedData);
+		} catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	public static byte[] decryptData(byte[] decryptData, PublicKey publicKey)
+	{
+		try
+		{
+			Cipher cipher = Cipher.getInstance(CIPHER);
+			cipher.init(Cipher.DECRYPT_MODE, publicKey);
+			return cipher.doFinal(decryptData);
 		} catch (Exception e)
 		{
 			return null;
@@ -280,7 +309,7 @@ public final class RSAUtils
 	 * 从文件中加载私钥
 	 * 
 	 * @param
-	 *            私钥文件名
+	 *
 	 * @return 是否成功
 	 * @throws Exception
 	 */

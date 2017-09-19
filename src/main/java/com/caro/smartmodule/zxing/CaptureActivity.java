@@ -40,18 +40,13 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.Vector;
-
 
 /**
  * 改进优化,caro zhu
@@ -132,6 +127,7 @@ public class CaptureActivity extends BaseSimpleAppCompatActivity implements Surf
         intent.setClass(activity, CaptureActivity.class);
         activity.startActivityForResult(intent, requestCode);
     }
+
 
 
     @Override

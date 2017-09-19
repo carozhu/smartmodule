@@ -60,5 +60,5 @@ public abstract class CipherStrategy {
 	 */
 	public abstract String decrypt(String encryptContent);
 
-	// 文件、流等
+
 }
