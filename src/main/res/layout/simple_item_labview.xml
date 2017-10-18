@@ -34,20 +34,24 @@
             android:text="访问社区"
             android:textSize="16sp" />
 
+        <!--<View-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content" />-->
+
         <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"></View>
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/tv_item_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
+            android:maxWidth="180dp"
             android:text="深圳市还挺早撒旦撒多撒；可怕我怕卡片上；澳康达十点多了澳柯玛"
             android:gravity="left"
-            android:maxLines="1"
-            android:maxLength="15"
+            android:maxLines="2"
             android:ellipsize="middle"
             android:textSize="13sp" />
 
