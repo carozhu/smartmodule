@@ -27,13 +27,9 @@ public class JavaEmail {
      * send email
      * testEmail = "2419625609@qq.com";
      * password = "carolily520"; // 密码为且需要邮箱独立密码，并需要开通smtp功能
-     * @param fromerDesc
-     * @param loginEmail
-     * @param loginPasswd
-     * @param recerverEmail
-     * @param sendContent
+     *
      */
-    public static void sendEmail(String fromerDesc, String loginEmail, String loginPasswd, String recerverEmail, String sendContent) {
+    public static void sendEmail(String themeTitle, String sendContent, String loginemail, String loginemailPassword, String recerverEmail) throws AddressException, MessagingException {
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");// Send mail	// protocol
         properties.setProperty("mail.smtp.auth", "true");// Need to verify
@@ -41,37 +37,28 @@ public class JavaEmail {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.host", "smtp.qq.com");
         properties.put("mail.smtp.port", "220");
-        MyAuthenticator smyauth = new MyAuthenticator(loginEmail, loginPasswd);
+        MyAuthenticator smyauth = new MyAuthenticator(loginemail, loginemailPassword);
         // setup process output messages sent
         Session session = Session.getInstance(properties, smyauth);
         session.setDebug(true);// debug mode
         // Email message
         Message messgae = new MimeMessage(session);
-        try {
-            messgae.setFrom(new InternetAddress(loginPasswd));// set sender
-            messgae.setText(sendContent);// set the messgae content
+        messgae.setFrom(new InternetAddress(loginemail));// set sender
+        messgae.setText(sendContent);// set the messgae content
+        messgae.setSubject(themeTitle);
+        // Send e-mail
+        Transport tran = session.getTransport();
 
+        // tran.connect("smtp.sohu.com", 25, "xxx@sohu.com", "xxxx");//sohu-mail
+        // server to connect to
+        // tran.connect("smtp.sina.com", 25, "xxx@sina.cn",
+        // "xxxxxxx");//Sina-mail server to connect to
+        // tran.connect("smtp.qq.com", 25, "xxx@qq.com", "xxxx");//qq-mail
+        // server to connect to
 
-            messgae.setSubject(fromerDesc);// set the message subject
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            // Send e-mail
-            Transport tran = session.getTransport();
-            // tran.connect("smtp.sohu.com", 25, "xxx@sohu.com", "xxxx");//sohu-mail
-            // server to connect to
-            // tran.connect("smtp.sina.com", 25, "xxx@sina.cn",
-            // "xxxxxxx");//Sina-mail server to connect to
-            // tran.connect("smtp.qq.com", 25, "xxx@qq.com", "xxxx");//qq-mail
-            // server to connect to
-            tran.connect("smtp.qq.com", 25, loginEmail, loginPasswd);
-            tran.sendMessage(messgae, new Address[]{new InternetAddress(recerverEmail)});// Set// mail// recipient (email)
-            tran.close();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        tran.connect("smtp.qq.com", 25, loginemail, loginemailPassword);
+        tran.sendMessage(messgae, new Address[]{new InternetAddress(recerverEmail)});// Set// mail// recipient (email)  test:2376323219@qq.com  452262448@qq.com  1025807062@qq.com
+        tran.close();
 
     }
 
@@ -110,6 +97,7 @@ public class JavaEmail {
         tran.sendMessage(messgae, new Address[]{new InternetAddress("1025807062@qq.com")});// Set// mail// recipient (email)  test:2376323219@qq.com  452262448@qq.com  1025807062@qq.com
         tran.close();
     }
+
 
     public static String getErrorInfoFromException(Throwable e) {
         try {
