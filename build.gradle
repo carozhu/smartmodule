@@ -4,31 +4,22 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.jakewharton.butterknife'
 buildscript {
     repositories {
-        maven { url 'https://jitpack.io' }
-        jcenter()
-        mavenCentral()
+        mavenCentral() // add repository
+        maven { url "http://repository.codehaus.org/org/codehaus" }
 
         dependencies {
-            classpath 'org.greenrobot:greendao-gradle-plugin:3.1.0'
+            classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         }
-
-        maven { url "http://repository.codehaus.org/org/codehaus" }
     }
 
 }
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-
-}
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'com.android.support') {
             if (!requested.name.startsWith("multidex")) {
-                details.useVersion "${rootProject.ext.supportLibVersion}"//'25.3.1'
+                details.useVersion "${rootProject.ext.supportLibVersion}"
             }
         }
     }
@@ -58,7 +49,6 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
-            //java.srcDirs = ['src']
             //eg:
             //resources.srcDirs = ['src']
             //aidl.srcDirs = ['src']
@@ -111,7 +101,11 @@ dependencies {
     //}
     compile "com.google.guava:guava:${rootProject.ext.guavaVersion}"
     //Google 官方方案,解决Dex拆分
-    compile 'com.android.support:multidex:1.0.0'
+
+
+    compile 'com.android.support:multidex:1.0.2'
+    androidTestCompile 'com.android.support:multidex:1.0.2'
+    androidTestCompile 'com.android.support:multidex-instrumentation:1.0.2'
 
 
     /*日志打印*/
@@ -178,9 +172,7 @@ dependencies {
 
 
 }
-repositories {
-    mavenCentral()
-}
+
 
 
 
