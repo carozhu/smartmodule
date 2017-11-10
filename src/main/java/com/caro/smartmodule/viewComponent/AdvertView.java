@@ -62,13 +62,16 @@ public class AdvertView  extends RelativeLayout{
         */
     }
 
-    public void showGifBanner(ArrayList<ImageBase> imgeList){
+    public void showBanner(ArrayList<ImageBase> imgeList,boolean showIndicator){
         banner = new SmartADautoScrollViewpager(mContext);
         banner.setLayoutParams(params);
         banner.loadDataAndShowADPager(imgeList,0);
         this.addView(banner);
-        banner.hideCirclePageIndicator();
-        //showView(this);
+        if (showIndicator){
+            //default show
+        }else {
+            banner.hideCirclePageIndicator();
+        }
         banner.getAutoViewpager().startAutoScroll(8000);
     }
 

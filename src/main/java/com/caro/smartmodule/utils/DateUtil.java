@@ -4,6 +4,7 @@ package com.caro.smartmodule.utils;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ParseException;
+import android.text.TextUtils;
 
 
 import java.text.SimpleDateFormat;
@@ -123,6 +124,8 @@ public class DateUtil {
      * @param formatType  formatType要转换的string类型的时间格式
      * @return
      * @throws ParseException
+     * etc:获取当前年月日 String curDate = DateUtil.longToString(System.currentTimeMillis(), "yyyy年MM月dd日");
+     *
      */
     public static String longToString(long currentTime, String formatType)
             throws ParseException {
@@ -497,44 +500,110 @@ public class DateUtil {
 
 
     /**
-     * 根据系统时间判断当前时间是白天还是夜晚
+     * 根据系统时间判断当前时间是AM 还是 PM
+     *
      * @param context
-     * @return type 0:白天，1：夜晚
+     * @return blnAMorPM
      */
-    public static int getSystimeDayOrNight( Context context){
-        int type = 0;
+    public static boolean getSystimeAMorPM(Context context) {
+        boolean blnAMorPM = false;
         //获得内容提供者
-        ContentResolver mResolver= context.getContentResolver();
+        ContentResolver mResolver = context.getContentResolver();
         //获得系统时间制
-        String timeFormat = android.provider.Settings.System.getString(mResolver,android.provider.Settings.System.TIME_12_24);
+        String timeFormat = android.provider.Settings.System.getString(mResolver, android.provider.Settings.System.TIME_12_24);
+        if (TextUtils.isEmpty(timeFormat)) {
+            return false;
+        }
         //判断时间制
-        if(timeFormat.equals("24"))
-        {
+        else if (timeFormat.equals("24")) {
             //24小时制
             Calendar calendar = GregorianCalendar.getInstance();
             calendar.setTime(new Date());
             int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = Integer.parseInt(getMinute());
-            //Log.d("dayType","24小时制，get hourOfDay == "+hourOfDay);
-            if (hourOfDay>6 && hourOfDay <19){//规定早上6点到下午7点为白天
-                type = 0;
-            }else {//其他时间为晚上
-                type = 1;
+            int minute = Integer.parseInt(DateUtil.getMinute());
+            if (hourOfDay > 6 && hourOfDay < 19) {//规定早上6点到下午7点为白天
+                if (hourOfDay <= 12) {
+                    blnAMorPM = true;
+                } else {
+                    blnAMorPM = false;
+                }
+            } else {//其他时间为晚上
+                blnAMorPM = false;
             }
-        }else {
+            //Log.d("dayType", "24小时制");
+        } else {
             //12小时制
             //获得日历
-            Calendar mCalendar=Calendar.getInstance();
-            if(mCalendar.get(Calendar.AM_PM)==0){
-                //白天
-                type = 0;
-            }else {
-                //晚上
-                type = 1;
+            Calendar mCalendar = Calendar.getInstance();
+            int hourOfDay = mCalendar.get(Calendar.HOUR_OF_DAY);
+            int minute = Integer.parseInt(DateUtil.getMinute());
+            if (mCalendar.get(Calendar.AM_PM) == 0) {    //白天
+                if (hourOfDay <= 12) {
+                    blnAMorPM = true;
+                } else {
+                    blnAMorPM = false;
+                }
+            } else {   //晚上
+                //晚上8点整
+                if (hourOfDay == 8 && minute == 00) {
+                    blnAMorPM = false;
+                }
+                //凌晨12点
+                if (hourOfDay == 00 && minute == 00) {
+                    blnAMorPM = true;
+                }
+            }
+            //Log.d("dayType", "12小时制");
+        }
+
+        return blnAMorPM;
+    }
+
+
+    /**
+     * 根据系统时间判断当前时间是白天还是夜晚
+     *
+     * @param context
+     * @return true:白天，false：夜晚
+     */
+    public static boolean getSystimeDayOrNight(Context context) {
+        boolean action = false;
+        //获得内容提供者
+        ContentResolver mResolver = context.getContentResolver();
+        //获得系统时间制
+        String timeFormat = android.provider.Settings.System.getString(mResolver, android.provider.Settings.System.TIME_12_24);
+        if (TextUtils.isEmpty(timeFormat)) {
+            return false;
+        }
+        //判断时间制
+        else if (timeFormat.equals("24")) {   //24小时制
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(new Date());
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = Integer.parseInt(DateUtil.getMinute());
+            int second = calendar.get(Calendar.SECOND);
+            //Log.d("dayType","24小时制，get hourOfDay == "+hourOfDay);
+            if (hourOfDay > 6 && hourOfDay < 19) {//规定早上6点到下午7点为白天
+                action = true;
+            } else {//其他时间为晚上
+                action = false;
+            }
+        } else { //12小时制
+            //获得日历
+            Calendar mCalendar = Calendar.getInstance();
+            int hourOfDay = mCalendar.get(Calendar.HOUR_OF_DAY);
+            int minute = Integer.parseInt(DateUtil.getMinute());
+            int second = mCalendar.get(Calendar.SECOND);
+            if (mCalendar.get(Calendar.AM_PM) == 0) { //白天
+
+                action = true;
+            } else { //晚上
+                action = false;
             }
             //Log.d("dayType","12小时制");
         }
-        return type;
+
+        return action;
     }
 
 }
