@@ -468,10 +468,8 @@ public class SystemUtils {
      * @return boolean
      */
     public static boolean isAppAlive(Context context, String packageName){
-        ActivityManager activityManager =
-                (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> processInfos
-                = activityManager.getRunningAppProcesses();
+        ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processInfos = activityManager.getRunningAppProcesses();
         for(int i = 0; i < processInfos.size(); i++){
             if(processInfos.get(i).processName.equals(packageName)){
                 System.out.println("NotificationLaunch" + String.format("----->the %s is running, isAppAlive return true", packageName));
@@ -480,6 +478,27 @@ public class SystemUtils {
         }
         System.out.println("NotificationLaunch" + String.format("----> the %s is not running, isAppAlive return false", packageName));
         return false;
+    }
+
+
+    /**
+     * 判断系统中是否有目标程序的包名
+     * @param context
+     * @param packageName
+     * @return
+     */
+    public static boolean isAvilible(Context context, String packageName){
+        final PackageManager packageManager = context.getPackageManager();//获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);//获取所有已安装程序的包信息
+        List<String> pName = new ArrayList<String>();//用于存储所有已安装程序的包名
+        //从pinfo中将包名字逐一取出，压入pName list中
+        if(pinfo != null){
+            for(int i = 0; i < pinfo.size(); i++){
+                String pn = pinfo.get(i).packageName;
+                pName.add(pn);
+            }
+        }
+        return pName.contains(packageName);//判断pName中是否有目标程序的包名，有TRUE，没有FALSE
     }
 
 }
