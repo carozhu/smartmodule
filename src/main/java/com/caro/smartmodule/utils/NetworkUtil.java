@@ -9,9 +9,11 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 import java.util.List;
@@ -25,20 +27,22 @@ public class NetworkUtil {
 
 
     /**
-     * 获取网路连接类型
+     * 获取当前网络连接的类型信息
+     * 原生
      *
      * @param context 上下文
      * @return 网络类型
      * 需要添加权限<uses-permission android:name="android.permission.INTERNET"/>
      * 需要添加权限<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
      */
-    public String getNetType(Context context) {
+    public static int getNetType(Context context) {
         ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = conn.getActiveNetworkInfo();
         String result = null;
+        int type=-1;
         if (info != null && info.isAvailable()) {
             if (info.isConnected()) {
-                int type = info.getType();
+                type = info.getType();
                 String typeName = info.getTypeName();
                 switch (type) {
                     case ConnectivityManager.TYPE_BLUETOOTH:
@@ -74,10 +78,68 @@ public class NetworkUtil {
                     default:
                         break;
                 }
+            }else {
+                type = -1;
+            }
+        }else {
+            type = -1;
+        }
+        Log.i("NetworkUtil","net  Type :"+result);
+        return type;
+    }
+
+    /**
+     * 获取当前的移动网络状态 ：没有网络-0：WIFI网络1：4G网络-4：3G网络-3：2G网络-2
+     * 自定义
+     *
+     * @param context
+     * @return
+     */
+    public static int getMobileNetType(Context context) {
+        //结果返回值
+        int netType = 0;
+        //获取手机所有连接管理对象
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context
+                .CONNECTIVITY_SERVICE);
+        //获取NetworkInfo对象
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        //NetworkInfo对象为空 则代表没有网络
+        if (networkInfo == null) {
+            return netType;
+        }
+        //否则 NetworkInfo对象不为空 则获取该networkInfo的类型
+        int nType = networkInfo.getType();
+        if (nType == ConnectivityManager.TYPE_WIFI) {
+            //WIFI
+            netType = 1;
+        } else if (nType == ConnectivityManager.TYPE_MOBILE) {
+            int nSubType = networkInfo.getSubtype();
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService
+                    (Context.TELEPHONY_SERVICE);
+            //3G   联通的3G为UMTS或HSDPA 电信的3G为EVDO
+            if (nSubType == TelephonyManager.NETWORK_TYPE_LTE
+                    && !telephonyManager.isNetworkRoaming()) {
+                netType = 4;
+            } else if (nSubType == TelephonyManager.NETWORK_TYPE_UMTS
+                    || nSubType == TelephonyManager.NETWORK_TYPE_HSDPA
+                    || nSubType == TelephonyManager.NETWORK_TYPE_EVDO_0
+                    && !telephonyManager.isNetworkRoaming()) {
+                netType = 3;
+                //2G 移动和联通的2G为GPRS或EGDE，电信的2G为CDMA
+            } else if (nSubType == TelephonyManager.NETWORK_TYPE_GPRS
+                    || nSubType == TelephonyManager.NETWORK_TYPE_EDGE
+                    || nSubType == TelephonyManager.NETWORK_TYPE_CDMA
+                    && !telephonyManager.isNetworkRoaming()) {
+                netType = 2;
+            } else {
+                netType = 2;
             }
         }
-        return result;
+        return netType;
     }
+
+
+
 
     /**
      * 网络是否可用
@@ -86,18 +148,14 @@ public class NetworkUtil {
      * @return
      */
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivity = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity == null) {
-        } else {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
+        if (context != null) {
+            // 获取手机所有连接管理对象(包括对wi-fi,net等连接的管理)
+            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            // 获取NetworkInfo对象
+            NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+            //判断NetworkInfo对象是否为空
+            if (networkInfo != null)
+                return networkInfo.isAvailable();
         }
         return false;
     }
@@ -214,17 +272,6 @@ public class NetworkUtil {
         }
     }
 
-    /**
-     * Get Phone IMEI Number
-     *
-     * @return imei
-     */
-
-    public String getImei(Context c) {
-        TelephonyManager telephonyManager = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
-        String imei = telephonyManager.getDeviceId();
-        return imei;
-    }
 
     public static boolean isNetworkConnected(Context context) {
         if (context != null) {
@@ -276,4 +323,60 @@ public class NetworkUtil {
         }
         return false;
     }
+
+    /***
+     * 判断是否有外网连接（普通方法不能判断外网的网络是否连接，比如连接上局域网）
+     *
+     * @return
+     */
+
+    public static final boolean ping() {
+
+        String result = null;
+        try {
+            String ip = "www.baidu.com";// ping 的地址，可以换成任何一种可靠的外网
+            Process p = Runtime.getRuntime().exec("ping -c 3 -w 100 " + ip);// ping网址3次
+            // 读取ping的内容，可以不加
+            InputStream input = p.getInputStream();
+            BufferedReader in = new BufferedReader(new InputStreamReader(input));
+            StringBuffer stringBuffer = new StringBuffer();
+            String content = "";
+            while ((content = in.readLine()) != null) {
+                stringBuffer.append(content);
+            }
+            Log.d("------ping-----", "result content : " + stringBuffer.toString());
+            // ping的状态
+            int status = p.waitFor();
+            if (status == 0) {
+                result = "success";
+                return true;
+            } else {
+                result = "failed";
+            }
+        } catch (IOException e) {
+            result = "IOException";
+        } catch (InterruptedException e) {
+            result = "InterruptedException";
+        } finally {
+            Log.d("----result---", "result = " + result);
+        }
+        return false;
+
+    }
+
+    /**
+     * 判断以太网网络是否可用
+     *
+     * @param context
+     * @return
+//     */
+//    public static boolean isIntenetConnected(Context context) {
+//        if (context != null) {
+//            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//            NetworkInfo mInternetNetWorkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
+//            boolean hasInternet = !ObjectUtil.isNullObject(mInternetNetWorkInfo) && mInternetNetWorkInfo.isConnected() && mInternetNetWorkInfo.isAvailable();
+//            return hasInternet;
+//        }
+//        return false;
+//    }
 }
