@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * A class which deals with reading, parsing, and setting the camera parameters
- * which are used to configure the camera hardware.
+ * which are used to configure the camera android.hardware.
  * 
  * <br/>
  * 

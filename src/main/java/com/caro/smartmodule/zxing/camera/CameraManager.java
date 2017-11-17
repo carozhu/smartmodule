@@ -89,7 +89,7 @@ public final class CameraManager {
 	}
 
 	/**
-	 * Opens the camera driver and initializes the hardware parameters.
+	 * Opens the camera driver and initializes the android.hardware parameters.
 	 * 
 	 * @param holder
 	 *            The surface object which the camera will draw preview frames
@@ -207,7 +207,7 @@ public final class CameraManager {
 	}
 
 	/**
-	 * Asks the camera hardware to begin drawing preview frames to the screen.
+	 * Asks the camera android.hardware to begin drawing preview frames to the screen.
 	 */
 	public synchronized void startPreview() {
 		Camera theCamera = camera;

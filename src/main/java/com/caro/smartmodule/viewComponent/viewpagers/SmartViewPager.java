@@ -472,7 +472,7 @@ public class SmartViewPager extends ViewGroup {
 
 		mScrollState = newState;
 		if (mPageTransformer != null) {
-			// PageTransformers can do complex things that benefit from hardware
+			// PageTransformers can do complex things that benefit from android.hardware
 			// layers.
 			enableLayers(newState != SCROLL_STATE_IDLE);
 		}
