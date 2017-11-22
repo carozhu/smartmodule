@@ -136,8 +136,8 @@ dependencies {
     compile "com.github.hotchemi:permissionsdispatcher:${rootProject.ext.permissionsDispatcherVersion}"
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${rootProject.ext.permissionsDispatcherVersion}"
 
-    /*数据库*/
-    compile 'org.greenrobot:greendao:3.1.0'
+    /*数据库 old 3.1.0*/
+    compile 'org.greenrobot:greendao:3.2.2'
 
     //图片处理
     compile 'top.zibin:Luban:1.1.2'  /*https://github.com/Curzibn/Luban 图片压缩算法*/
