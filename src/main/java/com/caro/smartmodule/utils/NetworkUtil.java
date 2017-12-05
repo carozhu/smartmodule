@@ -369,14 +369,14 @@ public class NetworkUtil {
      *
      * @param context
      * @return
-//     */
-//    public static boolean isIntenetConnected(Context context) {
-//        if (context != null) {
-//            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//            NetworkInfo mInternetNetWorkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
-//            boolean hasInternet = !ObjectUtil.isNullObject(mInternetNetWorkInfo) && mInternetNetWorkInfo.isConnected() && mInternetNetWorkInfo.isAvailable();
-//            return hasInternet;
-//        }
-//        return false;
-//    }
+     */
+    public static boolean isIntenetConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mInternetNetWorkInfo = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
+            boolean hasInternet = mInternetNetWorkInfo!=null && mInternetNetWorkInfo.isConnected() && mInternetNetWorkInfo.isAvailable();
+            return hasInternet;
+        }
+        return false;
+    }
 }
