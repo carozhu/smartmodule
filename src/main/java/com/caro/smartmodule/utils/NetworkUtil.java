@@ -324,18 +324,22 @@ public class NetworkUtil {
         return false;
     }
 
-    /***
+    /**
+     * 参考：http://blog.csdn.net/u012251822/article/details/12647211
      * 判断是否有外网连接（普通方法不能判断外网的网络是否连接，比如连接上局域网）
      * @param pingUrl www.baidu.com
+     * @param timeout ping超时时间 ：单位秒
      * @return
+     *
+     * 警告⚠️：不能放在Android UI thread中运行
      */
-
-    public static final boolean ping(String pingUrl) {
+    public static final boolean ping(String pingUrl,long timeout) {
 
         String result = null;
         try {
             String ip = pingUrl;// ping 的地址，可以换成任何一种可靠的外网
-            Process p = Runtime.getRuntime().exec("ping -c 3 -w 100 " + ip);// ping网址3次
+            //Process p = Runtime.getRuntime().exec("ping -c 3 -w 100 " + ip);// ping网址3次
+            Process p = Runtime.getRuntime().exec("ping -c 3 -w "+timeout+" " + ip);// ping网址3次
             // 读取ping的内容，可以不加
             InputStream input = p.getInputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(input));
