@@ -7,18 +7,17 @@ import java.util.LinkedList;
 
 public class ActivityManageHelper {
 
-    private LinkedList<Activity> activityLinkedList = new LinkedList<Activity>();
+    private LinkedList<Activity> activityLinkedList = new LinkedList<>();
+    private static class ActivityManageHelperHolder{
+        public  static   final  ActivityManageHelper INSTANCE = new ActivityManageHelper();
+    }
 
     private ActivityManageHelper() {
     }
 
-    private static ActivityManageHelper instance;
 
     public static ActivityManageHelper getInstance(){
-        if(null == instance){
-            instance = new ActivityManageHelper();
-        }
-        return instance;
+        return ActivityManageHelperHolder.INSTANCE;
     }
 
     /**
@@ -29,7 +28,7 @@ public class ActivityManageHelper {
      */
     public ActivityManageHelper addActivity(Activity activity){
         activityLinkedList.add(activity);
-        return instance;
+        return this;
     }
 
     /**
@@ -41,7 +40,7 @@ public class ActivityManageHelper {
                 activity.finish();
             }
         }
-        return instance;
+        return this;
     }
 
     /**
@@ -51,7 +50,7 @@ public class ActivityManageHelper {
         for (Activity activity : activityLinkedList) {
             activity.finish();
         }
-        return instance;
+        return this;
     }
 
     /**
@@ -62,5 +61,19 @@ public class ActivityManageHelper {
             return null;
         Activity activity=activityLinkedList.get(activityLinkedList.size()-1);
         return activity;
+    }
+
+    /**
+     * 是否包含当前activity
+     * @param activityClasses
+     * @return
+     */
+    public boolean haveActivity(Class<? extends Activity>... activityClasses){
+        for (Activity activity : activityLinkedList) {
+            if( Arrays.asList(activityClasses).contains( activity.getClass() ) ){
+                return true;
+            }
+        }
+        return false;
     }
 }
