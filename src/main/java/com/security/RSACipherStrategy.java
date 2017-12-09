@@ -16,6 +16,8 @@
 
 package com.security;
 
+import android.util.Log;
+
 import com.security.util.RSAUtils;
 
 import java.io.InputStream;
@@ -79,6 +81,8 @@ public class RSACipherStrategy extends CipherStrategy {
         byte[] decryptByte = RSAUtils.decryptData(encryptByte, mPrivateKey);
         if (decryptByte == null || decryptByte.length == 0)
             return "";
+        Log.i("RSAdecrypt","encryptByte.length == "+encryptByte.length+" decryptByte.length == "+decryptByte.length);
+
         return new String(decryptByte);
     }
 
