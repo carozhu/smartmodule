@@ -61,7 +61,7 @@ public class LoadingDialog {
         loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                // TODO: 取消网络请求
+
             }
         });
         return loadingDialog;
