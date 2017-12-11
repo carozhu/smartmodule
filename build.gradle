@@ -82,7 +82,6 @@ dependencies {
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')
-    compile files('libs/core-2.3.0.jar')
     compile files('libs/NineOldAndroidsLibrary-2.4.0.jar')
 
     //google 支持库
@@ -101,12 +100,7 @@ dependencies {
     //}
     compile "com.google.guava:guava:${rootProject.ext.guavaVersion}"
 
-    //Google 官方方案,解决Dex拆分
-    //compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:multidex:1.0.2'
-    //androidTestCompile 'com.android.support:multidex:1.0.2'
-    //androidTestCompile 'com.android.support:multidex-instrumentation:1.0.2'
-
 
     /*日志打印*/
     compile 'com.orhanobut:logger:1.13'
@@ -170,6 +164,8 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version" //导航栏
 
+    //zxing二维码识别
+    compile 'com.google.zxing:core:3.3.1'
 
 }
 
