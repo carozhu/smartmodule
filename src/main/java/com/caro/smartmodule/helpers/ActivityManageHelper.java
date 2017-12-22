@@ -58,7 +58,27 @@ public class ActivityManageHelper {
         }
         return this;
     }
-
+    public ActivityManageHelper finshActivities(Class<? extends Activity>... activityClasses) {
+        for(Class<?>  cls :activityClasses){
+            if (mActivityStack != null && cls!=null) {
+                // 使用迭代器进行安全删除
+                for (Iterator<WeakReference<Activity>> it = mActivityStack.iterator(); it.hasNext(); ) {
+                    WeakReference<Activity> activityReference = it.next();
+                    Activity activity = activityReference.get();
+                    // 清理掉已经释放的activity
+                    if (activity == null) {
+                        it.remove();
+                        continue;
+                    }
+                    if (activity.getClass().equals(cls)) {
+                        it.remove();
+                        activity.finish();
+                    }
+                }
+            }
+        }
+        return this;
+    }
     /**
      * 关闭指定类名的Activity
      * @param cls
