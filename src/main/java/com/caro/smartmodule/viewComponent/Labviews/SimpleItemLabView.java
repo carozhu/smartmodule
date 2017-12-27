@@ -192,4 +192,8 @@ public class SimpleItemLabView extends LinearLayout {
         }
     }
 
+    public void setLabText(String labText){
+        mTv_item_myview.setText(labText);
+    }
+
 }
