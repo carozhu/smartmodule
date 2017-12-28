@@ -190,7 +190,14 @@ public class NetworkUtil {
         return false;
     }
 
-
+    public static boolean isMobbleEnabled(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_MOBILE && connectivityManager.getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED) {
+            return true;
+        }
+        return false;
+    }
     /**
      * 网络检测
      *
