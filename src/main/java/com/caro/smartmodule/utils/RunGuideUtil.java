@@ -18,7 +18,7 @@ public class RunGuideUtil {
 	public static boolean initRunProgram(Context context) {
 		boolean blnFirstRun = false;
 		int getvercode = AppInfoUtil.getVerCode(context);
-		SharedPreferences preferences = context.getSharedPreferences("runhelp", 0);//xml name:count
+		SharedPreferences preferences = context.getSharedPreferences("runhelp", 0);//xml name
 		Editor editor = preferences.edit();
 		int saveVercode = preferences.getInt("vercode", 0);
 		if (getvercode > saveVercode) {

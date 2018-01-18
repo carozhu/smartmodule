@@ -385,7 +385,7 @@ public abstract class BaseSimpleAppCompatActivity extends AppCompatActivity impl
         Snackbar mysnackbar = Snackbar.make(getRootView(), tips, Snackbar.LENGTH_SHORT);
         View view = mysnackbar.getView();
         if (view != null) {
-            view.setBackgroundColor(ContextCompat.getColor(context, R.color.md_blue_grey_500));
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.default_theme_app_color));
             ((TextView) view.findViewById(R.id.snackbar_text)).setTextColor(ContextCompat.getColor(context, R.color.white));
         }
         mysnackbar.show();
